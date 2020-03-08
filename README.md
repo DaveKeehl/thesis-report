@@ -1,1 +1,1 @@
-# thesis-report
+# Bachelor Thesis Report
