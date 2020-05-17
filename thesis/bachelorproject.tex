@@ -39,24 +39,61 @@ Teaching students the fundamentals of programming is not an easy task, and Stack
 \section{Introduction} \label{introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section I am going to describe all the thoughts that went into this project at the very early stages, from the moment I first discussed with Prof. Hauswirth about the project, to the moment right before starting the "pre-production" phase (see \hyperref[requirements+analysis]{\textbf{section 3}}).
+In this first section I am going to describe all the thoughts that went into this project at the very early stages, from the moment I first discussed with Prof. Hauswirth about the project, to the moment right before starting the pre-production phase (see \hyperref[requirements+analysis]{\textbf{section 3}}).
 
 \subsection{Theoretical Background}
 
-The stack and the  
+Before continuing, I need to clarify some theoretical concepts that will be used many times throughout this report. In particular stack and heap, notional machines and clicker tools.
 
-\subsection{Problem}
+\subsubsection{Stack and heap}
+In the world of computer science, stack and heap are two very important memory allocation areas. The stack is a LIFO (\emph{Last In First Out}) data structure responsible for keeping track of function calls. Every time a function is called, a new stack frame is pushed onto the stack, containing its parameters, its local variables
+ and the registers return address \footnote{\url{https://medium.com/fhinkel/confused-about-stack-and-heap-2cf3e6adb771}}. Stack frames only exist during the execution of the function, and are popped from the stack when the latter has completed its lifecycle.\\
+ Conversely, the heap does not have a LIFO structure and it is independent from the program executions, being a segment of memory dedicated to dynamic memory allocation. When we program and allocate memory, we create objects on the heap. These objects do not disappear automatically like stack frames, and must be manually deallocated by the programmer (bad heap management can cause memory leaks - a failure in a program to release discarded memory, causing impaired performance or failure. \footnote {\url{https://en.wikipedia.org/wiki/Memory_leak}}).\\
+ When stack and heap point to the same address, there is no more memory left.
+ 
+\begin{figure}[h!]
+\includegraphics[scale=0.4]{figures/memory_layout.jpg}
+\centering
+\caption {Generalized memory layout of a program}
+\end{figure}
+ 
+\subsubsection{Notional machines}
 
+A notional machine can be described as a set of abstractions that define the structure and behavior of a computational device \footnote{\url{https://computinged.wordpress.com/2016/03/07/notional-machines-and-misconceptions-in-cs-developing-a-research-agenda-at-dagstuhl/}}. The goal of such a machine is not to be an exact replica of the real device, because by providing abstractions it is hopefully easier for students to understand than the real machine \footnote{\url{https://core.ac.uk/download/pdf/30713094.pdf}}.\\
+\noindent Students build their mental models about the notional machine through teaching, learning methods and materials used in programming classes \footnote{\url{http://www.scielo.edu.uy/scielo.php?script=sci_arttext&pid=S0717-50002016000200003}}.
+ 
+\begin{figure}[h!]
+\includegraphics[scale=0.8]{figures/notional_machine.jpg}
+\centering
+\caption {Process of creating mental models about notional machines.}
+\end{figure}
+ 
+\vspace{\fill}
+\pagebreak
+ 
+\subsubsection{Clicker tools}
+ 
+A clicker is a special purpose remote control used in traditional group response systems, where an instructor projects a multiple-choice question on the classroom projector and students use these tools to submit their answers by pressing one of the buttons. The advantage of using such systems is that the instructor has immediate feedback on the students understanding, by seeing their responses aggregated in the form of a histogram.\footnote{\url{http://sape.inf.usi.ch/informa}}.
+ 
+\subsection{Motivation}
 
+As I am going to show in \hyperref[state]{section 2} about state-of-the-art projects for programs visualizations, there are already quite a few tools in the real world that help students grasp important computer science topics, by showing the state of their code at each point of its execution. However, the majority of them are automated, and take as input real code.\\ 
+The motivation behind this web application is to let the students draw their own diagrams, demonstrating their mastery.\\
+Moreover, this would be the first of such applications to be web-based, allowing great flexibility.
 
 \subsection{Goal} \label{goal}
 
 The goal of this project is to create a progressive web application that allows student to very easily create Stack and Heap diagrams to visualize the structure of their code and better understand what is actually happening under the hood. This kind of diagram can give very useful insights both to the student and the professor.\\ This application is planned to be integrated into Informa (prof. Hauswirth's web platform for his Programming Fundamentals 2 course), but it can also be used as a standalone application, because of the nature of progressive web apps. That way, students can not only use it in class during class exercises, but also for instance at home while studying on their own.\\
 Furthermore, a JSON file is constantly kept up-to-date with every state change happening, which can be used for automatic testing and potentially instant feedback on the correctness of their diagrams.
 
-\subsection{Approach}
+\subsection{Use cases}
 
-Because of the integration on Informa, this application needs to be as scalable and modular as possible, and it is with this mindset that I have implemented every single feature. 
+This application was developed with the two following use cases in mind:
+
+\begin{enumerate}
+\item Teacher provides some code and an arbitrary breakpoint, while the student must create the a diagram mirroring the state of the program when the breakpoint is reached.
+\item Teacher draws a diagram and student must be able to describe the current state of the program execution.
+\end{enumerate}
 
 \vspace{\fill}
 
@@ -66,11 +103,9 @@ Because of the integration on Informa, this application needs to be as scalable 
 \section{State of the Art} \label{state}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section I am going to showcase projects that I consider to be the current state-of-the-art in terms of visual representations of stack and heap usage in programming.
+In this section I am going to showcase projects that I consider to be the current state-of-the-art in terms of visual representations of code. Not all of them are related to stack and heap diagrams, but they do still set a benchmark for graphical output and ease of learning.
 
 \subsection{Informa Clicker - SAPE Group}
-
-A clicker is a special purpose remote control used in traditional group response systems, where an instructor projects a multiple-choice question on the classroom projector and students use these tools to submit their answers by pressing one of the buttons. The advantage of using such systems is that the instructor has immediate feedback on the students understanding, by seeing their responses aggregated in the form of a histogram.\footnote{\url{http://sape.inf.usi.ch/informa}}.\\
 
 \noindent Informa \footnote{\url{https://informa.inf.usi.ch/}} is not only a really nice teaching platform, but it also has a clicker tool available for download, that students can use to solve interactive problems. One of the problems they can solve is showing the correct state of a Stack and Heap Diagram at a given point of a code execution.\\
 
@@ -82,25 +117,52 @@ A clicker is a special purpose remote control used in traditional group response
 \caption {Stack and Heap Diagrams in the Informa clicker tool}
 \end{figure}
 
-\subsection{Objects First with Java - David J. Barnes and Michael K\"{o}lling}
+\subsection{BlueJ - King's College London}
 
-\emph{Object First with Java} is a popular textbook for people that have zero experience with object oriented programming and it is used in many school throughout the world. This book comes with a small \emph{IDE} \footnote{Integrated Development Environment}, which is very helpful for beginners because in its main view there is a class and object diagram, which shows you the classes you have written, their instances and all the connections that are present in your code.\\
+BlueJ \footnote{\url{https://www.bluej.org/}} is free Java IDE (\emph{Integrated Development Environment}) designed for beginners, developed by the King's College London and officially supported by Oracle, the company that owns the Java platform.
+The aspect that makes BlueJ stand out from the other IDEs is its powerful main view, which shows an interactive diagram of the different elements that compose your source code. It also renders arrows that especially for beginners are very useful to know just after a quick look, how interconnected are the different components.\\
+BlueJ is also used in the the textbook \emph{Objects First with Java: A Practical Introduction using BlueJ} by David J. Barnes \& Michael K\"{o}lling, a popular choice for programming fundamentals classes that use Java as the first step into the world of object oriented programming languages.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 \centering
-\includegraphics[width=10cm]{figures/object_diagram.png}
-\caption {Object diagram in the textbook \emph{Object First with Java}}
+\includegraphics[width=\textwidth]{figures/bluej_shadow.png}
+\caption {BlueJ and its main view.}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=10cm]{figures/class_diagram.png}
-\caption {Class diagram in the textbook \emph{Object First with Java}}
-\end{figure}
+\subsection{Novis - Michael Berry \& Michael K\"{o}lling}
 
+Novis \footnote{\url{https://core.ac.uk/download/pdf/30713094.pdf}} is a notional machine implementation, aimed at beginners and integrated into BlueJ, providing real-time visualisation of the notional machine.
+
+\vspace{\fill}
 \pagebreak
 
-%\vspace{\fill}
+\subsection{JIVE}
+
+JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Interactive Visualization Environment} and it is an interactive execution for the Eclipse IDE \footnote{\url{https://www.eclipse.org/}} that provides visualizations of Java programs.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/jive.png}
+\caption {BlueJ and its main view.}
+\end{figure}
+
+\subsection{ViLLE}
+
+ViLLE \footnote{\url{https://ville.cs.utu.fi/old/}}
+
+\subsection{Python Tutor}
+
+Python Tutor \footnote{\url{http://www.pythontutor.com/}} is a website
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{figures/Novis.png}
+\caption {Novis.}
+\end{figure}
+
+\vspace{\fill}
+
+\pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Project analysis and requirements} \label{requirements+analysis}
@@ -117,11 +179,7 @@ As already mentioned in \hyperref[goal]{\textbf{section 1.3}}, the main goal of 
 \begin{itemize}
 	\item Arrows look nice and always point to the center of the target block, avoiding arrows overlapping.
 	\item The interface looks tidy, there is not anything that looks out of place.
-\end{itemize}
-
-\vspace{\fill}
-
-\pagebreak
+\end{itemize}\
 
 \textbf{\ul{UI - What does not work:}}
 
@@ -157,6 +215,9 @@ After running the UI/UX analysis and establishing that what had to be improved w
 	\item Create arrows by clicking on a reference variable, holding that click and releasing it on a heap object.
 	\item Drag blocks around.
 \end{enumerate}
+
+\pagebreak
+\vspace{\fill}
 
 \noindent Plus something new:
 
@@ -220,7 +281,6 @@ Besides stack and heap being separated by a divider, each has a header which lab
 	\item Better color schemes.
 	\item A toolbar is now docked on the right side of the window. It can be used to trigger some actions.
 	\item Heap objects now have a handle at the top, so that users can drag them around.
-	\item 
 \end{enumerate}
 
 \noindent However, at this stage we have also started to notice how blocks were really big as opposed to the ones present in the clicker tool. However, we decided to keep this design because ultimately the pros outnumbered the cons and this issue could have been addressed during development.
@@ -269,13 +329,61 @@ If we look at \textbf{\hyperref[tree]{Figure 7}}, we can really see how stack an
 
 \noindent As we can see, heap objects have more data due to the fact that you can drag them around (hence the \emph{position}) and while doing so the one you are currently moving, goes on top of the other ones (hence the \emph{depthIndex}).\\
 Going back to the components tree, every block has a \textbf{Header}, where users can write either the name of the class method name or the class name, and one or more \textbf{Variables}.\\
-Both the stack and the heap have a \textbf{Header}, which shows the region name and the number of frames/objects created. Headers at the region level contain a component called \textbf{AddIcon}, which that handles the creation of new blocks.\\
+Both the stack and the heap have a \textbf{Header}, which shows the region name and the number of frames/objects created. Headers at the region level contain a component called \textbf{AddIcon}, which that handles the creation of new blocks.
 
 \subsection{UI functionalities}
 
+In this subsection I am going to walk you through every functionality that this stack and heap diagram editor offers to the user.\\
+
+\ul{Stack}
+
+\begin{itemize}
+	\item Clicking on the plus button in the header, a new stack frame is created.
+	\item Stack frames are always added at the top of the stack.
+	\item When the stack contains more frames than the window can fit, the stack becomes scrollable. 
+	\item In the header it is rendered the number of frames currently populating the stack.
+\end{itemize}\
+
+\ul{Heap}
+
+\begin{itemize}
+	\item Similarly to what happens in the stack, by clicking on the plus button, users can create new objects on the heap. However, the buttons works a bit differently: when it is yellow, the state is "on", the mouse cursor change and the user can create a new object by clicking on the heap; when it is white, the state is "off" and the objects creation is disabled.
+	\item Objects on the heap can be dragged around by clicking on their handle at the top.
+	\item In the header it is rendered the number of objects currently populating the heap.
+\end{itemize}\
+
+\ul{Regions separator}
+
+\begin{itemize}
+	\item Users can drag the vertical separator between the stack and the heap to resize their width.
+\end{itemize}
+
+\pagebreak
+
+\ul{Stack frames and heap objects}
+
+\begin{itemize}
+	\item Users can type the name of the class method that generated a given stack frame.
+	\item Users can type the name of the class that generated a given object on the heap.
+	\item Users can create primitive and instance ("reference") variables.
+	\item Users can fill the information of a variables, like the name, the type and the value.
+	\item If a variable is of nature primitive, its value can be written using the keyboard.
+	\item If a variable is of nature reference, an arrow is created by clicking on the circle icon within the value input field, holding the left mouse button and releasing it on a target object on the heap.
+\end{itemize}\
+
+\ul{Toolbar}
+
+\begin{itemize}
+	\item Button 1: Users can download a JSON file, representing the current state of the diagram. When pressing this button, a prompt appears to enter the name of this file.
+	\item Button 2: Users can upload a JSON file that was downloaded from the application. This file is parsed and it triggers the application to re-render with the state of the diagram at the time of downloading that file.
+	\item Button 3: Users can start a new project (all stack frames and heap objects are deleted).
+	\item Button 4: Scale up the interface. At every click, the base font-size (16px) is increased by 2px.
+	\item Button 5: Scale down the interface. At every click, the base font-size (16px) is decreased by 2px.
+\end{itemize}
+
 \subsection{Storing global states} \label{storing states}
 
-In React, data is usually shared via props from parent to children: they can receive functions as props are send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than 3 levels of componenets, because it becomes difficult for the developer to clearly understand what is going on, and by doing so you end up storing data in intermediate components, which is never going to be used, effectively cluttering the component\\
+In React, data is usually shared via props from parent to children: they can receive functions as props and send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than 3 levels of components, because it becomes difficult for the developer to clearly understand what is going on, and by doing so you end up storing data in intermediate components, which is never going to be used, effectively cluttering the component\\
 
 \noindent Depending on the task, there are generally two approach to solve (or at least improve) the situation:
 
@@ -286,17 +394,19 @@ In React, data is usually shared via props from parent to children: they can rec
 
 \noindent Both approaches have pros and cons, but for global data transferring it makes more sense to use a state management tool, which is what I did. I used the native React Context API in conjunction with the relatively new \emph{React Hooks} \footnote{\url{https://reactjs.org/docs/hooks-intro.html}}. By doing so, I have been able to access data from any level of tree. However, I must also confess that Context, while being great at what it unlocks, introduces a bit of chaos when overused, which is sadly my case. This is maybe the aspect of this web application I would like to revisit the most in a few years, when I will be more experienced.
 
+\vspace{\fill}
+
 \pagebreak
 
-\noindent In particular I used the following contexts:
+\noindent In particular I created the following contexts:
 
 \begin{itemize}
-	\item \emph{Context 1}: 
-	\item \emph{Context 2}:
-	\item \emph{Context 3}:
-	\item \emph{Context 4}:
-	\item \emph{Context 5}:
-	\item \emph{Context 6}:
+	\item \ul{\emph{arrowsContext}}: used to store data about arrows.
+	\item \ul{\emph{heapAddModeContext}}: it allows communication between the plus icon in the heap header and the heap dragging area, effectively allowing the user to freely create objects on the mouse position.
+	\item \ul{\emph{heapDepthIndexContext}}: it allows me to keep always the current dragged heap object above the others, by correctly setting their css z-index properties.
+	\item \ul{\emph{heapMousePositionContext}}: in order to drag heap objects around, many different components needed to access the mouse position, so this context takes care of that.
+	\item \ul{\emph{resizableStackContext}}: because of the layout of the application, resizing the stack causes many coordinates to be recomputed, involving components from different  parts of the tree. This context allows all these parties to access the data they need.
+	\item \ul{\emph{stateContext}}: this context stores all the data about the diagram and keeps a big JavaScript object updated with every state change happening in the application.
 \end{itemize}
 
 \vspace{\fill}
