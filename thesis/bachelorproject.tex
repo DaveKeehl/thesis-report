@@ -9,8 +9,8 @@
 
 \author{Davide Ciulla}
 
-\title{Stack and Heap Diagrams: A Graphical Editor}
-%\subtitle{}
+\title{Stack and Heap Diagrams}
+\subtitle{A Graphical Editor}
 \versiondate{\today}
 
 \begin{committee}
@@ -22,7 +22,7 @@
 \end{committee}
 
 \abstract{
-Teaching students the fundamentals of programming is not an easy task, and Stack and Heap diagrams are very useful because they allow to really understand what happens when writing code. However, they are often drawn either on paper or with legacy software that does not feel adequate in 2020. In this project I developed a web-based graphical editor for building this kind of diagram in real-time, using modern web technologies like React and Sass.}
+Teaching students the fundamentals of programming is not an easy task at all. Luckily, there are useful tools like Stack and Heap diagrams that facilitate this process by allowing them  to really understand what they are doing when writing some code. However, these diagrams are often drawn either on paper or with legacy software that does not feel adequate in 2020. In this project, I developed a web-based stack and heap graphical editor, using modern front-end web technologies like React and Sass.}
 
 
 
@@ -47,8 +47,8 @@ Before continuing, I need to clarify some theoretical concepts that will be used
 
 \subsubsection{Stack and heap}
 In the world of computer science, stack and heap are two very important memory allocation areas. The stack is a LIFO (\emph{Last In First Out}) data structure responsible for keeping track of function calls. Every time a function is called, a new stack frame is pushed onto the stack, containing its parameters, its local variables
- and the registers return address \footnote{\url{https://medium.com/fhinkel/confused-about-stack-and-heap-2cf3e6adb771}}. Stack frames only exist during the execution of the function, and are popped from the stack when the latter has completed its lifecycle.\\
- Conversely, the heap does not have a LIFO structure and it is independent from the program executions, being a segment of memory dedicated to dynamic memory allocation. When we program and allocate memory, we create objects on the heap. These objects do not disappear automatically like stack frames, and must be manually deallocated by the programmer (bad heap management can cause memory leaks - a failure in a program to release discarded memory, causing impaired performance or failure. \footnote {\url{https://en.wikipedia.org/wiki/Memory_leak}}).\\
+ and the return address \footnote{\url{https://medium.com/fhinkel/confused-about-stack-and-heap-2cf3e6adb771}}. Stack frames only exist during the execution of a function, and are popped from the stack when the latter has completed its lifecycle.\\
+ Conversely, the heap does not have a LIFO structure and it is independent from the program execution, being a segment of memory dedicated to dynamic memory allocation. When we program and allocate memory, we create objects on the heap. These objects do not disappear automatically like stack frames, and must be manually deallocated by the programmer (bad heap management can cause memory leaks - a failure in a program to release discarded memory, causing impaired performance or failure. \footnote {\url{https://en.wikipedia.org/wiki/Memory_leak}}).\\
  When stack and heap point to the same address, there is no more memory left.
  
 \begin{figure}[h!]
@@ -59,7 +59,7 @@ In the world of computer science, stack and heap are two very important memory a
  
 \subsubsection{Notional machines}
 
-A notional machine can be described as a set of abstractions that define the structure and behavior of a computational device \footnote{\url{https://computinged.wordpress.com/2016/03/07/notional-machines-and-misconceptions-in-cs-developing-a-research-agenda-at-dagstuhl/}}. The goal of such a machine is not to be an exact replica of the real device, because by providing abstractions it is hopefully easier for students to understand than the real machine \footnote{\url{https://core.ac.uk/download/pdf/30713094.pdf}}.\\
+A notional machine can be described as a set of abstractions that define the structure and behavior of a computational device \footnote{\url{https://computinged.wordpress.com/2016/03/07/notional-machines-and-misconceptions-in-cs-developing-a-research-agenda-at-dagstuhl/}}. The goal of such a machine is not to be an exact replica of the real device, because by providing abstractions it is hopefully easier for students to understand the real machine \footnote{\url{https://core.ac.uk/download/pdf/30713094.pdf}}.\\
 \noindent Students build their mental models about the notional machine through teaching, learning methods and materials used in programming classes \footnote{\url{http://www.scielo.edu.uy/scielo.php?script=sci_arttext&pid=S0717-50002016000200003}}.
  
 \begin{figure}[h!]
@@ -77,13 +77,12 @@ A clicker is a special purpose remote control used in traditional group response
  
 \subsection{Motivation}
 
-As I am going to show in \hyperref[state]{section 2} about state-of-the-art projects for programs visualizations, there are already quite a few tools in the real world that help students grasp important computer science topics, by showing the state of their code at each point of its execution. However, the majority of them are automated, and take as input real code.\\ 
-The motivation behind this web application is to let the students draw their own diagrams, demonstrating their mastery.\\
-Moreover, this would be the first of such applications to be web-based, allowing great flexibility.
+As I am going to show in \hyperref[state]{\textbf{section 2}} about state-of-the-art projects for programs visualizations, there are already quite a few tools in the real world that help students grasp important computer science topics, by showing the state of their code at each point of its execution.\\
+\emph{However}, the majority of them are automated, meaning that they take real code as input and automatically create diagrams as outputs. With such programs, \textbf{students cannot demonstrate their understanding}, and that, is exactly why I am making this application. Not only it offers great flexibility being web-based, but it also sets the focus back on the students.
 
 \subsection{Goal} \label{goal}
 
-The goal of this project is to create a progressive web application that allows student to very easily create Stack and Heap diagrams to visualize the structure of their code and better understand what is actually happening under the hood. This kind of diagram can give very useful insights both to the student and the professor.\\ This application is planned to be integrated into Informa (prof. Hauswirth's web platform for his Programming Fundamentals 2 course), but it can also be used as a standalone application, because of the nature of progressive web apps. That way, students can not only use it in class during class exercises, but also for instance at home while studying on their own.\\
+The goal of this project is to create a progressive web application based on the Informa clicker tool, that allows students to very easily create Stack and Heap diagrams to visualize the structure of their code and better understand what is actually happening under the hood. This kind of diagram can give very useful insights both to the student and to the professor.\\ This application is planned to be integrated into Informa (prof. Hauswirth's web platform for his Programming Fundamentals 2 course), but it can also be used as a standalone application, because of the nature of progressive web apps. That way, students can not only use it in class during class exercises, but also for instance at home while studying on their own.\\
 Furthermore, a JSON file is constantly kept up-to-date with every state change happening, which can be used for automatic testing and potentially instant feedback on the correctness of their diagrams.
 
 \subsection{Use cases}
@@ -91,7 +90,7 @@ Furthermore, a JSON file is constantly kept up-to-date with every state change h
 This application was developed with the two following use cases in mind:
 
 \begin{enumerate}
-\item Teacher provides some code and an arbitrary breakpoint, while the student must create the a diagram mirroring the state of the program when the breakpoint is reached.
+\item Teacher provides some code and an arbitrary breakpoint, and the student must create  a diagram mirroring the state of the program when the breakpoint is reached.
 \item Teacher draws a diagram and student must be able to describe the current state of the program execution.
 \end{enumerate}
 
@@ -103,7 +102,7 @@ This application was developed with the two following use cases in mind:
 \section{State of the Art} \label{state}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section I am going to showcase projects that I consider to be the current state-of-the-art in terms of visual representations of code. Not all of them are related to stack and heap diagrams, but they do still set a benchmark for graphical output and ease of learning.
+In this section I am going to showcase projects that I consider to be state-of-the-art in terms of visual representations of code. Not all of them are related to stack and heap diagrams, but they do still set a benchmark for graphical output and ease of learning.
 
 \subsection{Informa Clicker - SAPE Group}
 
@@ -120,8 +119,8 @@ In this section I am going to showcase projects that I consider to be the curren
 \subsection{BlueJ - King's College London}
 
 BlueJ \footnote{\url{https://www.bluej.org/}} is free Java IDE (\emph{Integrated Development Environment}) designed for beginners, developed by the King's College London and officially supported by Oracle, the company that owns the Java platform.
-The aspect that makes BlueJ stand out from the other IDEs is its powerful main view, which shows an interactive diagram of the different elements that compose your source code. It also renders arrows that especially for beginners are very useful to know just after a quick look, how interconnected are the different components.\\
-BlueJ is also used in the the textbook \emph{Objects First with Java: A Practical Introduction using BlueJ} by David J. Barnes \& Michael K\"{o}lling, a popular choice for programming fundamentals classes that use Java as the first step into the world of object oriented programming languages.
+The aspect that makes BlueJ stand out from the other IDEs is its powerful main view, which shows an interactive diagram of the different elements that compose your source code. It also renders arrows that are very useful, because they show how interconnected are the different components.\\
+BlueJ is also used in the textbook \emph{Objects First with Java: A Practical Introduction using BlueJ} by David J. Barnes \& Michael K\"{o}lling, a popular choice for programming fundamentals classes that use Java as the first step into the world of object oriented programming languages.
 
 \begin{figure}[h]
 \centering
@@ -143,7 +142,7 @@ JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Intera
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figures/jive.png}
-\caption {BlueJ and its main view.}
+\caption {JIVE.}
 \end{figure}
 
 \subsection{ViLLE}
@@ -152,7 +151,7 @@ ViLLE \footnote{\url{https://ville.cs.utu.fi/old/}}
 
 \subsection{Python Tutor}
 
-Python Tutor \footnote{\url{http://www.pythontutor.com/}} is a website
+Python Tutor \footnote{\url{http://www.pythontutor.com/}} is a website ...
 
 \begin{figure}[h]
 \centering
@@ -211,7 +210,7 @@ After running the UI/UX analysis and establishing that what had to be improved w
 
 \begin{enumerate}
 	\item Freely create stack frames and heap objects by dragging and dropping them onto the interface.
-	\item Add and remove primitive and reference/instance variables from a given block \footnote{A block is a general term for stack frames and heap objects.}
+	\item Add and remove primitive and reference/instance variables from a given block \footnote{A block is a general term for stack frames and heap objects.}.
 	\item Create arrows by clicking on a reference variable, holding that click and releasing it on a heap object.
 	\item Drag blocks around.
 \end{enumerate}
@@ -231,7 +230,7 @@ After running the UI/UX analysis and establishing that what had to be improved w
 Alongside the requirements, we have also agreed upon a set of possible bonus features that could be added if I would have finished the project early:
 
 \begin{enumerate}
-	\item The JSON file which holds the diagram current state, can both be downloaded and uploaded into the web application. Uploading that file acts like a save state in a videogame, because the whole interface is reloaded as it was left at the time of downloading the JSON file.
+	\item The JSON file which represents the current state of the diagram, can both be downloaded and uploaded into the web application. Uploading that file acts like loading a save state in a videogame, because the whole interface goes back as it was left at the time of downloading the JSON file.
 	\item Panning and zooming around in the interface.
 	\item Add a multi-step functionality to the arrows, which would allow to customize the path of a given arrow.
 \end{enumerate}
@@ -244,15 +243,15 @@ Alongside the requirements, we have also agreed upon a set of possible bonus fea
 \section{Project design} \label{design}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section I am going to walk you through the design process, not only coding-wise but also from the graphics perspective, elaborating all the decisions and solutions I had to make during this critical development phase. The design process can, in fact, either make or break the entire project. Making awful decisions at this stage, causes unavoidable problems down the line and it is the precise reason why I took maybe a bit more time than what I had initially planned, and only start coding when we were satisfied enough on the result.
+In this section I am going to walk you through the design process, not only coding-wise but also from the graphics perspective, elaborating all the decisions and solutions I had to make during this critical development phase. The design process can, in fact, either make or break the entire project. Making awful decisions at this stage, causes unavoidable problems down the line and it is the precise reason why I took maybe a bit more time than what I had initially planned, and only start coding when we were satisfied enough with the result.
 
 \subsection{UI/UX research} \label{ui-ux research}
 
 In \hyperref[requirements+analysis]{\textbf{section 3}}, we saw how the biggest problem of the Informa clicker tool was the user interface and because of that, the first week and a half were completely spent sketching ideas on paper, bringing the best ones in Figma \footnote{My go-to UI/UX design editor (\url{https://www.figma.com/}).} and ultimately creating the high-fidelity mockups \footnote{Full size model of a design or device, used for product presentations or other purposes.} to show to prof. Hauswirth in order to get feedback.\\
-The first step was to figure out how to divide the stack and heap, since one of the requirements was about having a clear distinction between the two. In my mind there were two possible ways to approach this: either using a floating or docked stack.\\
+The first step was to figure out how to divide the stack and heap areas, since one of the requirements was about having a clear distinction between the two. In my mind there were two possible ways to approach this: either using a floating or docked stack.\\
 
-\noindent \hyperref[floating stack]{\textbf{Figure 4}} shows the first version of the user interface with a floating stack, and even though it is indeed separate from the heap and it might look somewhat cool, I did not like the clunkiness of having such an imposing object in the scene. However, one important solution was carried on until the end of the project, and that was the block data encapsulation, a fancy expression to indicate that every object has all its information contained within its rectangle shape. Compared to the Informa clicker, it is not a big change, but it certainly helps "glueing" the data and offer clearer separation between blocks.\\
-As far as stack frames and heap objects, I tried to adopt a more schematic approach, and for each variable reserve one row for each detail (name, type and value). However, this idea was eventually dropped because it took up too much space, and the number of variables that were visible without causing the stack content to be scrollable, was extremely low. 
+\noindent \hyperref[floating stack]{\textbf{Figure 7}} shows the first version of the user interface with a floating stack, and even though it is indeed separate from the heap and it might look somewhat cool, I did not like the clunkiness of having such an imposing object in the scene. However, one important solution was carried on until the end of the project, and that was the block data encapsulation, a fancy expression to indicate that every object has all its information contained within its rectangle shape. Compared to the Informa clicker, it is not a big change, but it certainly helps "glueing" the data and offers clearer separation between blocks.\\
+As far as stack frames and heap objects, I tried to adopt a more schematic approach, and reserve one row for each detail (name, type and value) of every variable. However, this idea was eventually dropped because it took up too much space, and the number of variables that were visible without causing the stack content to be scrollable, was extremely low. 
 
 \begin{figure}[h!]
 \centering
@@ -263,8 +262,8 @@ As far as stack frames and heap objects, I tried to adopt a more schematic appro
 
 \pagebreak
 
-\noindent \hyperref[separate regions]{\textbf{Figure 5}} shows an intermediate version of the design, which is substantially different from the previous one shown in \hyperref[floating stack]{\textbf{Figure 4}}. In fact, I tried to develop the idea of a docked stack. Actually, if compared to having it floating it might even have a few disadvantages, such as the impossibility of moving it around and occupying a fixed amount of space which will not be available to the heap. On the other hand, it is stylistically a lot nicer on the eyes and it definitely delivers the best separation between the two regions. I also started playing with colors, in order to bring out a bit more playfulness from a rather schematic UI.\\
-Besides stack and heap being separated by a divider, each has a header which labels the region where the user is working and a plus button to add new stack frames and new heap objects.
+\noindent \hyperref[separate regions]{\textbf{Figure 8}} shows an intermediate version of the design, which is substantially different from the previous one shown in \hyperref[floating stack]{\textbf{Figure 7}}. In fact, I tried to develop the idea of a docked stack. Actually, if compared to having it floating it might even have a few disadvantages, such as the impossibility of moving it around and occupying a fixed amount of space, which will not be available to the heap. On the other hand, it is stylistically a lot nicer on the eyes and it definitely delivers the best separation between the two regions. I also started playing with colors, in order to bring out a bit more playfulness from a rather schematic UI.\\
+Besides stack and heap being separated by a divider, each has a header which labels the region where the user is working, and a plus button to add new stack frames and new heap objects.
 
 \begin{figure}[h!]
 \centering
@@ -273,7 +272,7 @@ Besides stack and heap being separated by a divider, each has a header which lab
 \label{separate regions}
 \end{figure}
 
-\noindent After several revisions, we eventually found a design solution which was good enough to continue with the rest of the development phase and you can see that in \hyperref[final ui]{\textbf{Figure 6}}. Compared to \hyperref[separate regions]{\textbf{Figure 5}} it presents some clear improvements, such as:
+\noindent After several revisions, we eventually found a design solution which was good enough to continue with the rest of the development phase and you can see that in \hyperref[final ui]{\textbf{Figure 9}}. Compared to \hyperref[separate regions]{\textbf{Figure 8}} it presents some clear improvements, such as:
 
 \begin{enumerate}
 	\item Redesigned variables. Each one is now represented as a separate box inside the enclosing region block.
@@ -305,7 +304,7 @@ Although stack and heap are separate regions that expect different user interact
 	\item Have blocks, which look and function in the exact way, except their color schemes.
 \end{itemize}
 
-\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[]{\textbf{section 5}} for a more detailed explanation about this topic). \hyperref[tree]{\textbf{Figure 7}} shows the components tree on which I eventually settled.
+\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[]{\textbf{section 5}} for a more detailed explanation about this topic). \hyperref[tree]{\textbf{Figure 10}} shows the components tree on which I eventually settled.
 
 \begin{figure}[h!]
 \centering
@@ -318,7 +317,7 @@ Although stack and heap are separate regions that expect different user interact
 
 \noindent Starting from the top of the tree, \textbf{App} is the highest component and it is mainly used to define the global layout of the web application. Some top-level computations, such as resizing the stack width is done within this component.\\
 Following the two branches, \textbf{Stack} and \textbf{Heap} are the components that represent the two areas of memory, and they keep and manage all the information related to their area within the application.\\
-If we look at \textbf{\hyperref[tree]{Figure 7}}, we can really see how stack and heap are really similar. In fact, the only difference in their subtrees is the type of building block they can store. The stack stores \textbf{StackFrames}, while heap stores \textbf{HeapObjects}. They look very similar, but the data they generate is different. Here is a snippet of the JSON file created by the web application:\\
+If we look at \textbf{\hyperref[tree]{Figure 11}}, we can really see how stack and heap are really similar. In fact, the only difference in their subtrees is the type of building block they can store. The stack stores \textbf{StackFrames}, while heap stores \textbf{HeapObjects}. They look very similar, but the data they generate is different. Here is a snippet of the JSON file created by the web application:\\
 
 \begin{figure}[h!]
 \centering
@@ -329,7 +328,7 @@ If we look at \textbf{\hyperref[tree]{Figure 7}}, we can really see how stack an
 
 \noindent As we can see, heap objects have more data due to the fact that you can drag them around (hence the \emph{position}) and while doing so the one you are currently moving, goes on top of the other ones (hence the \emph{depthIndex}).\\
 Going back to the components tree, every block has a \textbf{Header}, where users can write either the name of the class method name or the class name, and one or more \textbf{Variables}.\\
-Both the stack and the heap have a \textbf{Header}, which shows the region name and the number of frames/objects created. Headers at the region level contain a component called \textbf{AddIcon}, which that handles the creation of new blocks.
+Both the stack and the heap have a \textbf{Header}, which shows the region name and the number of frames/objects created. Headers at the region level contain a component called \textbf{AddIcon}, which handles the creation of new blocks.
 
 \subsection{UI functionalities}
 
@@ -383,7 +382,7 @@ In this subsection I am going to walk you through every functionality that this 
 
 \subsection{Storing global states} \label{storing states}
 
-In React, data is usually shared via props from parent to children: they can receive functions as props and send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than 3 levels of components, because it becomes difficult for the developer to clearly understand what is going on, and by doing so you end up storing data in intermediate components, which is never going to be used, effectively cluttering the component\\
+In React, data is usually shared via props from parent to children: they can receive functions as props and send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than 3 levels of components. In fact, it becomes difficult for the developer to clearly understand what is going on, ending up storing data in intermediate components that that are never going to use it.\\
 
 \noindent Depending on the task, there are generally two approach to solve (or at least improve) the situation:
 
@@ -419,9 +418,45 @@ In React, data is usually shared via props from parent to children: they can rec
 
 % 1. Several layers of abstractions
 % 2. Several coordinates conversions
-% 3. Learning how to use React properly
 % 4. Finding the best compromise between dryness and modularity
 % 4. Figuring out how to make the arrows
+
+During the development of this web application, I have faced a few implementation issues. In particular, I had problems of varying degrees with the following points.
+
+\subsection{Multiple coordinates conversions}
+
+At the beginning of the project, when I was building all the JSX and setting up all the CSS rules, I soon discovered that stack and heap needed different "treatments". The stack is built using flexbox with vertical direction, so the coordinates of each stack frame do not really matter, they just stack on top of each other. On the other hand, heap objects need precise coordinates in order to be placed on the screen. However, there is a twist: heap objects coordinates are \emph{relative}, meaning that position ${(0,0)}$ is the top left corner of the heap (header excluded), while mouse coordinates are absolute (= relative to the entire viewport).\\
+Objects on the heap use relative coordinates because the stack is resizable: if an object on the heap had position absolute, it would stay in the same place while resizing the stack, not producing the desired effect of seeing everything shift; it would also go \emph{behind} the stack, a very undesirable side effect.\\
+Because of that, I often found myself converting coordinates from system to system.
+
+\subsection{Middle ground between dryness and modularity}
+
+In this web app, some components are incredibly similar in term of look but slightly differ in behavior. When using modular frameworks like React, such a situation is not as trivial as one might think. It is very easy to create one single big component that uses conditional rendering in order to avoid code repetition. In my case, that is exactly what happened when I was building the interface and I had just started to work on the drag feature of the objects on the heap.\\ I started having problems when I realized that stack frames and heap objects needed different data representations (i.e. spatial coordinates and z-index values because the current dragged object has to be on top of the other ones). At that point, I had to decouple stack/heap and stack frames/heap objects and find a good compromise between having components with identical elements inside and keep a relatively high level of modularity.
+
+\subsection{Arrows}
+
+Arrows were the toughest feature to implement. Partially because they are implemented using SVG \footnote{\url{https://it.wikipedia.org/wiki/Scalable_Vector_Graphics}} (\emph{Scalable Vector Graphics}) and the syntax and some of its aspect are not very easy (like the path attribute), but also because of their highly dynamic nature in the context of the web application. In fact, in order to render them, I needed to have at least a rudimental system that would register all the information representing an arrow (start/end position, start region, variable and parent from where the connection was created, target object on the heap).\\For that reason, during the first week of work on them, the only way I could have any sort of validation was by constantly printing values on the console in the browser, and by taking and analyzing screenshots. After a while I became very fast and it did not take me long to check on a photo editor if something was correct or not. However, when a bug appeared, the debugging process was always very slow and tedious, because it was difficult to pinpoint the source of the problem.\\
+
+\noindent Another implementation issue I had when working with arrows, was about the way I was updating already drawn arrows. The web application keeps track of two things:
+
+\begin{enumerate}
+	\item The new arrow that is being drawn on the screen.
+	\item All the arrows that have already been drawn and that need to "listen" for certain events and be updated accordingly (for example, an object that they are connected to, changes its position or gets deleted). When the new arrow is created (the mouse click is released), it gets added to the array if there is not already an arrow with the exact same data. 
+\end{enumerate}
+
+\vspace{\fill}
+
+\pagebreak
+
+\noindent When it came down to keep the arrows updated, I could follow two paths:
+
+\begin{enumerate}
+	\item Listen for every event that led to the arrow coordinates being recomputed.
+	\item Rebuild the whole array of arrows every times the state of the diagram changes.
+\end{enumerate}
+
+\noindent Technically, the first approach is more performant, because it only updates the arrows that do really change. However, in such an application it is really unlikely to have so many elements that the performance starts to suffer. Furthermore, using a single point of reference (the state of the diagram) is far easier than watching multiple ones. Hence, I opted for the second way as a solution for this issue.
+
 
 \vspace{\fill}
 
