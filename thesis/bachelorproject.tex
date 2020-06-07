@@ -61,7 +61,7 @@ My web application is an example of a such a machine.
 \begin{figure}[h!]
 \includegraphics[scale=0.8]{figures/notional_machine.png}
 \centering
-\caption {Process of creating mental models about notional machines.}
+\caption {Process of creating mental models about notional machines}
 \end{figure}
  
 \vspace{\fill}
@@ -118,14 +118,14 @@ BlueJ is also used in the textbook \emph{Objects First with Java: A Practical In
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/bluej_classes_objects.png}
-\caption {Main view of BlueJ showing classes and the arrows connecting them. On the bottom there is the Object Bench containing all the current classes instances.}
+\caption {Main view of BlueJ showing classes and the arrows connecting them. On the bottom there is the Object Bench containing all the current classes instances}
 \label {bluej_classes_objects}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/bluej_objects_open.png}
-\caption {Detailed view of an object in BlueJ. As you can see, arrows are only displayed in the main view and for classes. In the object view, reference variable have an arrow icon, which can be double clicked to see what it is referring to.}
+\caption {Detailed view of an object in BlueJ. As you can see, arrows are only displayed in the main view and for classes. In the object view, reference variable have an arrow icon, which can be double clicked to see what it is referring to}
 \label {bluej_objects_open}
 \end{figure}
 
@@ -136,7 +136,7 @@ Novis \cite{7743153} is a notional machine implementation, aimed at beginners an
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.4]{figures/Novis.png}
-\caption {Novis.}
+\caption {Novis}
 \end{figure}
 
 \subsection{JIVE}
@@ -146,7 +146,7 @@ JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Intera
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/jive.png}
-\caption {JIVE.}
+\caption {JIVE}
 \end{figure}
 
 \subsection{ViLLE}
@@ -156,7 +156,7 @@ ViLLE \footnote{\url{https://ville.cs.utu.fi/old/}} is a multi-language program 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.2]{figures/ville.png}
-\caption {ViLLE.}
+\caption {ViLLE}
 \end{figure}
 
 \subsection{Python Tutor}
@@ -166,7 +166,7 @@ Python Tutor \footnote{\url{http://www.pythontutor.com/}} is a web application f
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=0.177]{figures/python_tutor}
-\caption {Python tutor.}
+\caption {Python tutor}
 \end{figure}
 
 \vspace{\fill}
@@ -306,7 +306,7 @@ Besides stack and heap being separated by a divider, each has a header which lab
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/final-interface.png}
-\caption {Final interface of the web application at the end of the project.}
+\caption {Final interface of the web application at the end of the project}
 \end{figure}
 
 \subsection{Components tree}
@@ -318,7 +318,9 @@ Although stack and heap are separate regions that expect different user interact
 	\item Have blocks, which look and function in the exact way, except their color schemes.
 \end{itemize}
 
-\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[]{\textbf{Section 5}} for a more detailed explanation about this topic). \hyperref[tree]{\textbf{Figure 14}} shows the components tree on which I eventually settled.
+\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[implementation]{\textbf{Section 5}} for a more detailed explanation about this topic). \hyperref[tree]{\textbf{Figure 14}} shows the components tree on which I eventually settled.
+
+\bigskip
 
 \begin{figure}[h!]
 \centering
@@ -327,7 +329,9 @@ Although stack and heap are separate regions that expect different user interact
 \label{tree}
 \end{figure}
 
-\noindent Starting from the top of the tree, \textbf{App} is the highest component and it is mainly used to define the global layout of the web application. Some top-level computations, such as resizing the stack width is done within this component.\\
+\bigskip
+
+\noindent Starting from the top of the tree, \textbf{Editor} is the highest component. It is actually the component \textbf{App} wrapped in three context providers (more on this in \hyperref[storing states]{\textbf{Section 4.4}}), which allowed me to define global states across the interface. \textbf{App} is mainly used to define the layout of the web application, and some top-level computations, such as resizing the stack width, are done within this component.\\
 Following the two branches, \textbf{Stack} and \textbf{Heap} are the components that represent the two areas of memory, and they keep and manage all the information related to their area within the application.\\
 If we look at \textbf{\hyperref[tree]{Figure 15}}, we can really see how stack and heap are really similar. In fact, the only difference in their subtrees is the type of building block they can store. The stack stores \textbf{StackFrames}, while heap stores \textbf{HeapObjects}. They look very similar, but the data they generate is different. Here is a snippet of the JSON file created by the web application:\\
 
@@ -341,6 +345,9 @@ If we look at \textbf{\hyperref[tree]{Figure 15}}, we can really see how stack a
 \noindent As we can see, heap objects have more data due to the fact that you can drag them around (hence the \emph{position}) and while doing so the one you are currently moving, goes on top of the other ones (hence the \emph{depthIndex}).\\
 Going back to the components tree, every block has a \textbf{Header}, where users can write either the name of the class method name or the class name, and one or more \textbf{Variables}.\\
 Both the stack and the heap have a \textbf{Header}, which shows the region name and the number of frames/objects created. Headers at the region level contain a component called \textbf{AddIcon}, which handles the creation of new blocks.
+
+\vspace{\fill}
+\pagebreak
 
 \subsection{UI functionalities}
 
@@ -367,7 +374,7 @@ In this subsection I am going to walk you through every functionality that this 
 
 \begin{itemize}
 	\item Users can drag the vertical separator between the stack and the heap to resize their width.
-\end{itemize}
+\end{itemize}\
 
 \ul{Stack frames and heap objects}
 
@@ -379,6 +386,9 @@ In this subsection I am going to walk you through every functionality that this 
 	\item If a variable is of nature primitive, its value can be written using the keyboard.
 	\item If a variable is of nature reference, an arrow is created by clicking on the circle icon within the value input field, holding the left mouse button and releasing it on a target object on the heap.
 \end{itemize}\
+
+\vspace{\fill}
+\pagebreak
 
 \ul{Toolbar}
 
@@ -419,16 +429,24 @@ In React, data is usually shared via props from parent to children: they can rec
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementation issues} \label{issues}
+\section{Implementation} \label{implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 1. Several layers of abstractions
-% 2. Several coordinates conversions
-% 4. Finding the best compromise between dryness and modularity
-% 4. Figuring out how to make the arrows
+In this section I am going to talk about some important parts of the development process that were particularly challenging, and how I managed to find solutions and continue with the implementation of the design. The code base is hosted on a GitHub repository \footnote{\url{https://github.com/DaveKeehl/shd-editor}} and it is deployed on the Netlify servers \footnote{\url{https://stackandheap.netlify.app/}}.\\
+\noindent This web application can be embedded on other web applications and all it is needed in order to do that, is to place the \textbf{Editor} component anywhere in the JSX. React will take care of the rest.
 
-During the development of this web application, I have faced a few implementation issues. In particular, I had problems of varying degrees with the following points.
+\subsection{Dragging}
 
+One of the core features of the Informa clicker was the ability of being able to drag elements around the screen. When I was in the process of deciding how to implement it, I considered leveraging the \emph{draggable} attribute of HTML because it allows exactly that and it makes dragging very smooth, since it is supported by the browser out of the box. Moreover, there are many event listeners that one can use to customize the experience using React, naming the \textbf{onDrag}, \textbf{onDragStart}, \textbf{onDragEnd}, \textbf{onDragEnter}, \textbf{onDragExit}, \textbf{onDragLeave} and \textbf{onDragOver} events.\\
+From the outside it might seem like a perfectly viable solution, however this method has a major drawback: the dragged element looks like a semi-transparent ghost clone of the original and you cannot apply any styles to it, as CSS does not provide any rules to target it. Furthermore, this so called \emph{ghost clone} is not even part of the DOM, so you cannot even dynamically add CSS classes to customize its look, and it sets a very aggressive bounding box \footnote{\url{https://en.wikipedia.org/wiki/Minimum_bounding_box}} around the dragged object (you can see in \textbf{Figure 16} how the drop-shadow is sharply cut in the corners, instead of spreading it naturally).\\
+For these reasons, I decided to rebuild the whole dragging system by myself, which led me to a series of problems that I have documented in this section.
+ 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.5]{figures/ghost-clone.png}
+\caption {Depiction of what happens when using the native \emph{draggable} attribute}
+\end{figure}
+ 
 \subsection{Multiple coordinates conversions}
 
 At the beginning of the project, when I was building all the JSX and setting up all the CSS rules, I soon discovered that stack and heap needed different "treatments". The stack is built using flexbox with vertical direction, so the coordinates of each stack frame do not really matter, they just stack on top of each other. On the other hand, heap objects need precise coordinates in order to be placed on the screen. However, there is a twist: heap objects coordinates are \emph{relative}, meaning that position ${(0,0)}$ is the top left corner of the heap (header excluded), while mouse coordinates are absolute (= relative to the entire viewport).\\
@@ -443,10 +461,7 @@ In this web app, some components are incredibly similar in terms of look, but sl
 
 Arrows were the toughest feature to implement. Partially because they are implemented using SVG \footnote{\url{https://it.wikipedia.org/wiki/Scalable_Vector_Graphics}} (\emph{Scalable Vector Graphics}) and the syntax and some of its aspect are not very easy (like the \emph{path} attribute), but also because of their highly dynamic nature in the context of this web application. In fact, in order to render them, I needed to have at least a rudimental system that would register all the information representing an arrow (start/end position, start region, variable and parent from where the connection was created, target object on the heap).\\For that reason, during the first week of work on them, the only way I could have any sort of validation was by constantly printing values on the console in the browser, and by taking and analyzing screenshots. After a while I became very fast and it did not take me long to check on a photo editor if something was correct or not. However, when a bug appeared, the debugging process was always very slow and tedious, because it was difficult to pinpoint the source of the problem.\\
 
-\noindent Arrows were also a challenge when I had to decide where to place them exactly in the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}. Since they need to be drawn and always be visible while doing so, it meant that in terms of depth they needed to be over all the other UI elements in the diagram. If I set he \emph{z-index} accordingly in my stylesheet that would visually work, but it would make everything below this new top layer not interacive. The key in this case was to find the right \emph{pointer-events} \footnote{url{https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events}} attribute value (more specifically \texttt{pointer-events:visible}), in order to let the arrows take up the entire screen, but at the same time allow the user to still interact with the underlying elements where there are no arrows drawn.\\
-
-\vspace{\fill}
-\pagebreak
+\noindent Arrows were also a challenge when I had to decide where to place them exactly in the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}. Since they need to be drawn and always be visible while doing so, it meant that in terms of stacking order along the z-axis, they needed to be over all the other UI elements in the diagram. If I set the \emph{z-index} accordingly in my stylesheet that would visually work, but it would make everything below this new top layer not interactive. The key in this case was to find the right \emph{pointer-events} \footnote{url{https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events}} attribute value (more specifically \texttt{pointer-events:visible}), in order to let the arrows take up the entire screen, but at the same time allow the user to still interact with the underlying elements where there are no arrows drawn.\\
 
 \noindent Another implementation issue I had when working with arrows, was about the way I was updating already drawn arrows. In particular, the web application keeps track of two things:
 
@@ -482,88 +497,143 @@ We are almost at the end of this report, and after talking about the design and 
 
 \subsection{Methodology}
 
-The main goal of my user evaluation was to see if users were able to replicate some stack and heap diagrams made with the Informa clicker, so I selected the following four and gave them to ten classmates. Asking them to write down any problems they faced or some thoughts regarding a particular thing they had to do after completing each diagram.
-
-% alexios
-% lazar
-% sergio
-% valentina
-% salvatore
-% marcello
-% luca
-% andrea
-% ozren
-% tita
+The main goal of the user evaluation was to try to see if users actually had an easier time using my web application compared to using the Informa clicker. I selected the two following diagrams and gave them to fifteen computer science students (all of them had already used the Informa Clicker before), asking them to reproduce both of them using the two tools, and writing down the time needed to complete each task. My hypothesis was that on a grand-scale, my application would require less time because of all the improvements that I made based on the UI/UX research.
 
 \begin{figure}[h!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example1.png}
+  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example2.png}
   \caption{Example 1}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
-  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example2.png}
+  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example4.png}
   \caption{Example 2}
   \label{fig:sub2}
 \end{subfigure}
 \label{fig:test}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example3.png}
-  \caption{Example 3}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example4.png}
-  \caption{Example 4}
-  \label{fig:sub2}
-\end{subfigure}
-\label{fig:test}
-\end{figure}
-
 \bigskip
 
-\noindent All participants had to do the same steps and in the same order. In this case, the measurements after drawing each diagram are the following questions:
+\noindent All participants had to do the same steps and in the same order. In this case, the measurements after drawing each diagram were to indicate the time required to draw each diagram. At the end of the experiment, the users were prompted to answer some final questions:
 
 \begin{enumerate}
-	\item Were you able to reproduce the example diagram?
-	\item Did you find it easy? If not, why?
+	\item Were you able to reproduce both diagrams? If not, why?
+	\item Did you find the new application easier to use? If now, why?
+	\item How would you rate the clarity of the layout in the new app (i.e. are all the features clearly laid out in an intuitive way or did you have to spend some time searching for them)?
+	\item How would you rate the user experience in the new app (i.e. did something prevent you from successfully completing a certain task)?
+	\item Did you experience any lag? If yes, how bad was it? Was it a problem for completing the task?
+	\item Did you find any bugs? If yes, what bugs did you find? Could you list all the steps to reproduce them?
+	\item Do you have any suggestions for improving the user interface and/or the user experience?
 \end{enumerate}
 
-\bigskip
-
-\noindent After completing each task, the user was prompted to answer some final questions about the overall experience:
-
-\begin{enumerate}
-	\item How would you rate the clarity of the layout (i.e. are all the features clearly laid out in an intuitive way or did you have to spend some time searching them)?
-	\item How would you rate the user experience in terms of performance (i.e. did you notice any lag while performing any task?)
-	\item If you experienced any lag, how bad was it? Was it a problem for completing the task?
-	\item Did you find any bugs?
-	\item Do you have any suggestions for improving the user interface and the user experience?
-\end{enumerate}
+\noindent With all the data, I created some graphs and did some statistics in order to properly assess the results.
 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.5]{figures/experiment-design.png}
-\caption {Design of the user evaluation experiment.}
+\includegraphics[width=\textwidth-50pt]{figures/experiment-design.png}
+\caption {Design of the user evaluation experiment}
 \label{tree}
 \end{figure}
 
+\vspace{\fill}
+\pagebreak
+
 \subsection{Results}
+
+All the participants were able to complete all tasks and (almost) everybody agreed on the fact that the new application is easier to use compared to the Informa clicker (see \textbf{Figure 19}), but if we look at \textbf{Figures 20} and \textbf{21} depicting the time duration it took them to reproduce the two diagrams, there are some interesting points to make.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{figures/ease-of-use.png}
+\caption {The majority of the participants found that the new tool is easier to use}
+\end{figure}
+
+\bigskip
+
+\noindent As we can see in \textbf{Figure 20}, all participants were quicker to draw the diagram using the web application, but the same cannot be said for the second one. In fact, in \textbf{Figure 21} the situation is a lot more mixed and it is difficult to understand at first sight what exactly happened. However, after talking to all the participants and after reading all the answers to the question \emph{``Do you have any suggestions for improving the user interface and/or the user experience?''}, I realized that there were three problematic factors:
+
+\begin{enumerate}
+	\item Lack of advanced object manipulation, such as duplication and position shifting in the stack (moving stack frames up and down).
+	\item Lack of navigability in the heap, combined to the elements being too big for the given space.
+	\item Objects on the heap can only be dragged by clicking on the handle at the top of their shape. This creates problems when objects are on stacked on top of each other and they cover the handle of the underlying elements, making it impossible to reposition them.
+\end{enumerate}
+
+\noindent I was aware of problems 2 and 3, but to be honest I had not even thought about the first one, so I it went straight to the list of possible future implementation (see \hyperref[future work]{\textbf{Section 7.2}}). Furthermore, the second diagram was busier than the first one and it required more elements in the scene, so it made sense that some issues would arise. I would have been surprised if the opposite happened.\\
+However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts.
+
+\bigskip
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & \textbf{Diagram 1 (Informa Clicker)} & \textbf{Diagram 1 (Web Application)} \\ \hline
+\textbf{Average} & 00:04:09 & 00:02:15 \\ \hline
+\textbf{Median} & 00:03:53 & 00:02:15 \\ \hline
+\end{tabular}
+\caption{Time duration comparison for the first diagram using the two tools}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+ & \textbf{Diagram 2 (Informa Clicker)} & \textbf{Diagram 2 (Web Application)} \\ \hline
+\textbf{Average} & 00:03:30 & 00:03:09 \\ \hline
+\textbf{Median} & 00:03:28 & 00:03:05 \\ \hline
+\end{tabular}
+\caption{Time duration comparison for the second diagram using the two tools}
+\end{table}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
+\caption {Time duration comparison for the the first diagram between the Informa Clicker and the new web application}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
+\caption {Time duration comparison for the the second diagram between the Informa Clicker and the new web application}
+\end{figure}
+
+\noindent The participant also seemed to enjoy the new design and its user experience, as shown in \hyperref[clarity]{\textbf{Figures 22}} and \hyperref[ux-ratings]{\textbf{23}}. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/clarity-ratings.png}
+\caption {Caption}
+\label{clarity}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\textwidth]{figures/ux-ratings.png}
+\caption {Caption}
+\label{ux-ratings}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+ & \textbf{Clarity ratings} & \textbf{UX ratings} \\ \hline
+\textbf{Average} & 8.857 & 8.428 \\ \hline
+\textbf{Median} & 9 & 8.5 \\ \hline
+\end{tabular}
+\caption{Average and median values of the ratings on a scale from 1 to 10 given by the participants to the clarity of the UI and to the general UX of the application}
+\end{table}
 
 \subsection{Comments}
 
-\vspace{\fill}
+Based on the results obtained by the user evaluation, I can say that users found the new web application easier to use, even if there are aspects that need to be perfected or implemented in order to be fully considered ready for the public. However, at this state it is useable and the feedback was positive.
 
+\vspace{\fill}
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -576,9 +646,10 @@ In this section I am going to assess my work and provide a list of features and 
 
 Now that the project is concluded, it is time for me to make some final assessments based on the end product that I have created. \\
 In terms of features, I was able to complete all the minimum requirements which means that my web application can replicate everything that was already possible in the Informa clicker. I have also implemented features that were not originally there, such as multi arrow selection/deletion, upload and download of JSON files, interface scaling and fullscreen mode.\\
-In terms of performance the results are good, but not great. Having to constantly capture the mouse position is expensive, but it is unfortunately required to do any computation. In fact, dragging an object on the heap for some extended period of time causes the fan to inevitably start spinning very fast, and as a result the browser becomes laggy. Some browsers even presented clear performance issues, such as Safari.\\However, even though I do not have a lot of control over certain aspects, I cannot stop thinking about the fact that, as already stated in \hyperref[storing states]{\textbf{Section 4.4}}, some things can be for sure done better.
+In terms of performance the results are good, but not great. Having to constantly capture the mouse position is expensive, but it is unfortunately required to do any computation. In fact, dragging an object on the heap for some extended period of time causes the fan to inevitably start spinning very fast, and as a result the browser becomes laggy. Some browsers even presented clear performance issues, such as Safari. Perhaps it could be beneficial to do some profiling in order to understand the cause behind Safari's lack of performance when it comes to rendering highly interactive applications like mine. \\
+However, even though I do not have a lot of control over certain aspects, I cannot stop thinking about the fact that, as already stated in \hyperref[storing states]{\textbf{Section 4.4}}, some things can be for sure done better.
 
-\subsection{Future work}
+\subsection{Future work} \label{future work}
 
 Although the diagram is already decently feature-rich, there are still some things that could be implemented:
 
@@ -587,8 +658,18 @@ Although the diagram is already decently feature-rich, there are still some thin
 	\item Allow users to store arrays inside variables.
 	\item Allow users to pan around the heap, in order to have a virtually infinite canvas.
 	\item A mini-map, to always see the big-picture of the diagram.
+	\item Add some visual hints when an object is not currently visible but is present in the scene.
 	\item Touch events, in order to expand the compatibility to 	smaller devices like iPads (they should however be the lowest screen size supported by this application, since it does not make a lot of sense to create diagrams on smartphones).
 	\item Create an algorithm to automatically reposition the objects on the heap so that the overlapping elements are reduced to the minimum.
+	\item Auto-adjust the elements' size according to the screen size.
+	\item Allow the users to select the objects on the heap and apply some actions, like copy, duplicate, cut and paste.
+	\item Allow the users to drag the objects on the heap also by clicking on parts of their shape that is not the handle at the top.
+	\item Allow the users to create new objects on the heap by double click on any available space.
+	\item Allow the users to take screenshots of the diagram.
+	\item Allows the users to move stack frames up and down.
+	\item Add some UI assistance.
+	\item Add a "garbage collection" button in the toolbar. Pressing that button would delete all the blocks that are not referenced by other elements or that have no outgoing arrows.
+	\item Make the entire heap object draggable, not only by clicking on the handle at the top. This would allow to reposition more quickly overlapping objects. 
 \end{enumerate}
 
 \noindent Some general improvements could also be made, in particular:
@@ -596,6 +677,7 @@ Although the diagram is already decently feature-rich, there are still some thin
 \begin{enumerate}
 	\item Research on a possible more scalable solution that allows an easier maintenance of the state of the app, without neither having to rebuild the diagram at every state change nor having to listen to all the different events.
 	\item If the research on point 1 shows that listening to different events is a must for performance optimization, research on a way to reduce the complexity of this task (perhaps only a few tactical event listener might be required instead of eight or ten).
+	\item Research on why Safari responds slowly to some events. An answer to this issue could hint at perhaps a less expensive way of handling and computing spatial coordinates.
 \end{enumerate}
 
 \subsection{Final notes}
