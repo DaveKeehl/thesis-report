@@ -308,8 +308,7 @@ Besides stack and heap being separated by a divider, each has a header which lab
 \includegraphics[width=\textwidth]{figures/final-interface.png}
 \caption {Final interface of the web application at the end of the project}
 \end{figure}
-
-\subsection{Components tree}
+S\subsection{Components tree}
 
 Although stack and heap are separate regions that expect different user interactions, they share important similarities. In fact, they both:
 
@@ -493,30 +492,27 @@ Arrows were the toughest feature to implement. Partially because they are implem
 % 2. Task replication -> I check if everything that was possible with the old tool
 %                        still holds up with the new one
 
-We are almost at the end of this report, and after talking about the design and the issues I have faced while developing the application, I want to discuss the user evaluation process, which gave me useful insights.
+We are almost at the end of this report, and after talking about the design and the most important aspects of the implementation phase, I want to discuss the user evaluation process, which gave me useful insights.
 
 \subsection{Methodology}
 
-The main goal of the user evaluation was to try to see if users actually had an easier time using my web application compared to using the Informa clicker. I selected the two following diagrams and gave them to fifteen computer science students (all of them had already used the Informa Clicker before), asking them to reproduce both of them using the two tools, and writing down the time needed to complete each task. My hypothesis was that on a grand-scale, my application would require less time because of all the improvements that I made based on the UI/UX research.
+The main goal of the user evaluation was to try to see if users actually had an easier time using my web application compared to using the Informa clicker. I selected the two following diagrams and gave them to fifteen computer science students (all of them had already used the Informa clicker before), asking them to reproduce both of them using the two tools, and writing down the time needed to complete each task. My hypothesis was that on a grand-scale, my application would require less time because of all the improvements that I made based on the UI/UX research.
 
 \begin{figure}[h!]
 \centering
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example2.png}
-  \caption{Example 1}
-  \label{fig:sub1}
+  \caption{Diagram 1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=\textwidth-10pt]{figures/informa_clicker_example4.png}
-  \caption{Example 2}
-  \label{fig:sub2}
+  \caption{Diagram 2 2}
 \end{subfigure}
 \label{fig:test}
 \end{figure}
 
-\bigskip
 
 \noindent All participants had to do the same steps and in the same order. In this case, the measurements after drawing each diagram were to indicate the time required to draw each diagram. At the end of the experiment, the users were prompted to answer some final questions:
 
@@ -545,7 +541,7 @@ The main goal of the user evaluation was to try to see if users actually had an 
 
 \subsection{Results}
 
-All the participants were able to complete all tasks and (almost) everybody agreed on the fact that the new application is easier to use compared to the Informa clicker (see \textbf{Figure 19}), but if we look at \textbf{Figures 20} and \textbf{21} depicting the time duration it took them to reproduce the two diagrams, there are some interesting points to make.\\
+All the participants were able to complete all tasks and (almost) everybody agreed on the fact that the new application is easier to use compared to the Informa clicker (see \textbf{Figure 19}), but if we look at \textbf{Figures 20} and \textbf{21} depicting the time duration it took them to reproduce the two diagrams, there are some interesting points to make.
 
 \begin{figure}[h!]
 \centering
@@ -555,66 +551,67 @@ All the participants were able to complete all tasks and (almost) everybody agre
 
 \bigskip
 
-\noindent As we can see in \textbf{Figure 20}, all participants were quicker to draw the diagram using the web application, but the same cannot be said for the second one. In fact, in \textbf{Figure 21} the situation is a lot more mixed and it is difficult to understand at first sight what exactly happened. However, after talking to all the participants and after reading all the answers to the question \emph{``Do you have any suggestions for improving the user interface and/or the user experience?''}, I realized that there were three problematic factors:
+\noindent As we can see in \textbf{Figure 20}, all participants were quicker to draw the diagram using the web application, but the same cannot be said for the second one. In fact, in \textbf{Figure 21} the situation is a lot more mixed and it is difficult to understand at first sight what exactly happened. However, after talking to all the participants and after reading all the answers to the question \emph{``Do you have any suggestions for improving the user interface and/or the user experience?''}, I realized that there were four problematic factors:
 
 \begin{enumerate}
 	\item Lack of advanced object manipulation, such as duplication and position shifting in the stack (moving stack frames up and down).
 	\item Lack of navigability in the heap, combined to the elements being too big for the given space.
 	\item Objects on the heap can only be dragged by clicking on the handle at the top of their shape. This creates problems when objects are on stacked on top of each other and they cover the handle of the underlying elements, making it impossible to reposition them.
+	\item The objects are too big and take up too much space
 \end{enumerate}
 
-\noindent I was aware of problems 2 and 3, but to be honest I had not even thought about the first one, so I it went straight to the list of possible future implementation (see \hyperref[future work]{\textbf{Section 7.2}}). Furthermore, the second diagram was busier than the first one and it required more elements in the scene, so it made sense that some issues would arise. I would have been surprised if the opposite happened.\\
-However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts.
+\noindent All the answers from that final question were about one of those four points, so they are definitely to implement/fix in the future. I was aware of problems 2 and 3, but to be honest I had not even thought about the first one. Furthermore, the second diagram was busier than the first one and it required more elements in the scene, so it made sense that some issues would arise. I would have been surprised if the opposite happened.\\
+However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, 9 out of 15 people (60\%) were quicker with both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts. 
 
-\bigskip
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
+\caption {Diagram 1 - Time duration comparison between the Informa clicker and the new web application}
+\end{figure}
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
  & \textbf{Diagram 1 (Informa Clicker)} & \textbf{Diagram 1 (Web Application)} \\ \hline
-\textbf{Average} & 00:04:09 & 00:02:15 \\ \hline
-\textbf{Median} & 00:03:53 & 00:02:15 \\ \hline
+\textbf{Average time duration} & 00:04:09 & 00:02:15 \\ \hline
+\textbf{Median time duration} & 00:03:53 & 00:02:15 \\ \hline
 \end{tabular}
 \caption{Time duration comparison for the first diagram using the two tools}
 \end{table}
+
+\noindent As we can see in \textbf{Table 2}, the time duration difference between the two tools is not as big as for diagram 1, but it was still enough to assess my work positively. Moreover, it is also important to consider that while replicating the second diagram, many participants admitted they had grasped how the Informa clicker worked, and so they did not get lost like the first time. That is a clear indication that I have made a relatively good job at creating an intuitive interface.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.7]{figures/diagram2-time-comparison.png}
+\caption {Diagram 2 - Time duration comparison between the Informa clicker and the new web application}
+\end{figure}
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|l|l|l|l|}
 \hline
  & \textbf{Diagram 2 (Informa Clicker)} & \textbf{Diagram 2 (Web Application)} \\ \hline
-\textbf{Average} & 00:03:30 & 00:03:09 \\ \hline
-\textbf{Median} & 00:03:28 & 00:03:05 \\ \hline
+\textbf{Average time duration} & 00:03:30 & 00:03:09 \\ \hline
+\textbf{Median time duration} & 00:03:28 & 00:03:05 \\ \hline
 \end{tabular}
 \caption{Time duration comparison for the second diagram using the two tools}
 \end{table}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
-\caption {Time duration comparison for the the first diagram between the Informa Clicker and the new web application}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
-\caption {Time duration comparison for the the second diagram between the Informa Clicker and the new web application}
-\end{figure}
-
-\noindent The participant also seemed to enjoy the new design and its user experience, as shown in \hyperref[clarity]{\textbf{Figures 22}} and \hyperref[ux-ratings]{\textbf{23}}. 
+\noindent Other time time duration, I also I asked how much they would rate the clarity of the new layout and the user experience inherent from it. The participant gave positive feedback, leaving very high scores. \textbf{Table 3} shows the average and median scores, while \hyperref[clarity]{\textbf{Figures 22}} and \hyperref[ux-ratings]{\textbf{23}} show the exact ratings that were given. 
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/clarity-ratings.png}
-\caption {Caption}
+\caption {Ratings of the clarity of the layout in the app on a scale from 1 to 10 (1 = not clear at all; 10 = very clear)}
 \label{clarity}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/ux-ratings.png}
-\caption {Caption}
+\caption {Ratings of the user experience in the new app on a scale from 1 to 10 (1 = terrible; 10 = amazing)}
 \label{ux-ratings}
 \end{figure}
 
@@ -623,15 +620,15 @@ However, despite the apparent mixed results of the second diagram, thanks to som
 \begin{tabular}{|l|l|l|}
 \hline
  & \textbf{Clarity ratings} & \textbf{UX ratings} \\ \hline
-\textbf{Average} & 8.857 & 8.428 \\ \hline
-\textbf{Median} & 9 & 8.5 \\ \hline
+\textbf{Average} & 8.75 & 8.33 \\ \hline
+\textbf{Median} & 9 & 8 \\ \hline
 \end{tabular}
 \caption{Average and median values of the ratings on a scale from 1 to 10 given by the participants to the clarity of the UI and to the general UX of the application}
 \end{table}
 
 \subsection{Comments}
 
-Based on the results obtained by the user evaluation, I can say that users found the new web application easier to use, even if there are aspects that need to be perfected or implemented in order to be fully considered ready for the public. However, at this state it is useable and the feedback was positive.
+Based on the results obtained by the user evaluation, I can say that users found the new web application easier to use, even if there are aspects that need to be perfected or implemented in order to be fully considered ready for the public. Hence, my hypothesis can be considered accepted.
 
 \vspace{\fill}
 \pagebreak
