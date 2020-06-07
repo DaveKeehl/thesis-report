@@ -43,11 +43,11 @@ Teaching students the fundamentals of programming is not an easy task at all, bu
 
 In this first section I am going to describe all the thoughts that went into this project at the very early stages, from the moment I first discussed the project with prof. Hauswirth, to the moment right before starting the pre-production phase (see \hyperref[requirements+analysis]{\textbf{Section 3}}).
 
-\subsection{Theoretical Background}
+\subsection{Theoretical background}
 
 \noindent In the world of computer science, stack and heap are two very important memory allocation areas. The stack is a LIFO (\emph{Last In First Out}) data structure responsible for keeping track of function calls. Every time a function is called, a new stack frame is pushed onto the stack, containing its parameters, its local variables
  and the return address\footnote{\url{https://medium.com/fhinkel/confused-about-stack-and-heap-2cf3e6adb771}}. Stack frames only exist during the execution of a function, and are popped from the stack when the latter has completed its lifecycle.\\
- Conversely, the heap does not have a LIFO structure and it is independent from the program execution, being a segment of memory dedicated to dynamic memory allocation. When we program and allocate memory, we create objects on the heap. These objects do not disappear automatically like stack frames, and in some programming languages (like C and C++) they must be manually deallocated by the programmer (bad heap management can cause memory leaks - a failure in a program to release discarded memory, causing impaired performance or failure\footnote {\url{https://en.wikipedia.org/wiki/Memory_leak}}).\\
+ Conversely, the heap does not have a LIFO structure and it is independent from the program execution, being a segment of memory dedicated to dynamic memory allocation. When we program and allocate memory, we create objects on the heap. In some programming languages (like C and C++), these objects do not disappear automatically and they must be manually deallocated by the programmer (bad heap management can cause memory leaks - a failure in a program to release discarded memory, causing impaired performance or failure\footnote {\url{https://en.wikipedia.org/wiki/Memory_leak}}).\\
  
 \begin{figure}[h!]
 \includegraphics[scale=0.4]{figures/memory_layout.jpg}
@@ -112,7 +112,7 @@ In this section I am going to showcase projects that I consider to be state-of-t
 \subsection{BlueJ - King's College London}
 
 BlueJ \footnote{\url{https://www.bluej.org/}} (see \hyperref[bluej_classes_objects]{\textbf{Figure 4}} and \hyperref[bluej_objects_open]{\textbf{Figure 5}}) is free Java IDE (\emph{Integrated Development Environment}) designed for beginners, developed by the King's College London and officially supported by Oracle, the company that owns the Java platform.
-The aspect that makes BlueJ stand out from the other IDEs is its powerful main view, which shows an interactive diagram of the different elements that compose your source code. It also renders arrows that are very useful, because they show how the different classes are interconnected. Objects are shows too, but they do not present any arrow.\\
+The aspect that makes BlueJ stand out from the other IDEs is its powerful main view, which shows an interactive diagram of the different elements that compose your source code. It also renders arrows that are very useful, because they show how the different classes are interconnected. Objects are shown too, but they do not present any arrow.\\
 BlueJ is also used in the textbook \emph{Objects First with Java: A Practical Introduction using BlueJ} by David J. Barnes \& Michael K\"{o}lling \cite{barnes2016objects}, a popular choice for programming fundamentals classes that use Java as the first step into the world of object oriented programming languages.
 
 \begin{figure}[h!]
@@ -193,9 +193,9 @@ As already mentioned in \hyperref[goal]{\textbf{Section 1.3}}, the main goal of 
 
 \begin{itemize}
 	\item Not enough overall white space \footnote{\url{https://blog.bannersnack.com/white-space-in-graphic-design/}}.
-	\item Colors can be improved, because they do not convey a lot of excitement being very pale. In this case, saturation be help create a more engaging experience.
+	\item Colors can be improved, because they do not convey a lot of excitement by being very pale. In this case, saturation can help to create a more engaging experience.
 	\item All buttons that appear on mouseover events substantially clutter the interface and hide too many elements.
-	\item Space dedicated to the diagram is relatively small compared to the whole screen.
+	\item The space dedicated to the diagram is relatively small compared to the whole screen.
 	\item The buttons in the top toolbar are not styled as buttons.
 \end{itemize}\
 
@@ -210,16 +210,17 @@ As already mentioned in \hyperref[goal]{\textbf{Section 1.3}}, the main goal of 
 \begin{itemize}
 	\item The buttons at the top of the diagram, by not looking like buttons, make their purpose unclear to the user.
 	\item Dragging the start of an arrow starting from a stack frame, makes it snap back to the border of a given block instead of the center of a variable.
+	\item There is no clear distinction between stack and heap, except for the background color of stack frames and objects.
 \end{itemize}\
 
-\noindent As you can read from this analysis, the result is pretty clear: the Informa clicker does not have any problem in terms of user experience, but it lacks a proper user interface to better deliver what already works.
+\noindent As you can read from this analysis, the result is pretty clear: the Informa clicker does not have big problems in terms of user experience, but it lacks a proper user interface to better deliver what already works.
 
 \vspace{\fill}
 \pagebreak
 
 \subsection{Requirements}
 
-After running the UI/UX analysis and establishing that what had to be improved was the UI, prof. Hauswirth and I set as minimum requirements all the features the clicker already has. In particular users can:
+After running the UI/UX analysis and establishing that what had to be improved was the UI, prof. Hauswirth and I set as minimum requirements all the features the clicker already had. In particular users should have been able:
 
 \begin{enumerate}
 	\item Freely create stack frames and heap objects by dragging and dropping them onto the interface.
@@ -231,7 +232,7 @@ After running the UI/UX analysis and establishing that what had to be improved w
 \noindent Plus something new:
 
 \begin{enumerate}
-	\item A data structure must be updated with every state change within within the diagram (more on this is \hyperref[storing states]{\textbf{Section 4.4}}), and eventually be converted to a JSON file more offline editing and automating tests on Informa.
+	\item A data structure must be updated with every state change within the diagram (more on this is \hyperref[storing states]{\textbf{Section 4.4}}), and eventually be converted to a JSON file for offline editing and automated tests on Informa.
 	\item Clear division between stack and heap.
 \end{enumerate}
 
@@ -308,7 +309,7 @@ Besides stack and heap being separated by a divider, each has a header which lab
 \includegraphics[width=\textwidth]{figures/final-interface.png}
 \caption {Final interface of the web application at the end of the project}
 \end{figure}
-S\subsection{Components tree}
+\subsection{Components tree}
 
 Although stack and heap are separate regions that expect different user interactions, they share important similarities. In fact, they both:
 
@@ -331,14 +332,14 @@ Although stack and heap are separate regions that expect different user interact
 \bigskip
 
 \noindent Starting from the top of the tree, \textbf{Editor} is the highest component. It is actually the component \textbf{App} wrapped in three context providers (more on this in \hyperref[storing states]{\textbf{Section 4.4}}), which allowed me to define global states across the interface. \textbf{App} is mainly used to define the layout of the web application, and some top-level computations, such as resizing the stack width, are done within this component.\\
-Following the two branches, \textbf{Stack} and \textbf{Heap} are the components that represent the two areas of memory, and they keep and manage all the information related to their area within the application.\\
-If we look at \textbf{\hyperref[tree]{Figure 15}}, we can really see how stack and heap are really similar. In fact, the only difference in their subtrees is the type of building block they can store. The stack stores \textbf{StackFrames}, while heap stores \textbf{HeapObjects}. They look very similar, but the data they generate is different. Here is a snippet of the JSON file created by the web application:\\
+Following the three branches, \textbf{Stack} and \textbf{Heap} are the components that represent the two areas of memory, and they keep and manage all the information related to their area within the application, while \textbf{Arrows} stores all the arrows present in the scene.\\
+If we look at \textbf{\hyperref[tree]{Figure 14}}, we can really see how stack and heap are really similar. In fact, the only difference in their subtrees is the type of building block they can store. The stack stores \textbf{StackFrames}, while heap stores \textbf{HeapObjects}. They look very similar, but the data they generate is different (see \hyperref[json]{\textbf{Figure 15}}).\\
 
 \begin{figure}[h!]
 \centering
 \includegraphics[scale=.3]{figures/blocks_data.png}
-\caption {\textbf{Left}: StackFrame, \textbf{Right}: HeapObject}
-\label{tree}
+\caption {Snippet of the JSON file created by the web application, showing on left the data contained in a StackFrame, and on the right the data contained in a HeapObject}
+\label{json}
 \end{figure}
 
 \noindent As we can see, heap objects have more data due to the fact that you can drag them around (hence the \emph{position}) and while doing so the one you are currently moving, goes on top of the other ones (hence the \emph{depthIndex}).\\
@@ -364,7 +365,7 @@ In this subsection I am going to walk you through every functionality that this 
 \ul{Heap}
 
 \begin{itemize}
-	\item Similarly to what happens in the stack, by clicking on the plus button, users can create new objects on the heap. However, the buttons works a bit differently: when it is yellow, the state is "on", the mouse cursor change and the user can create a new object by clicking on the heap; when it is white, the state is "off" and the objects creation is disabled.
+	\item Similarly to what happens in the stack, by clicking on the plus button, users can create new objects on the heap. However, the buttons works a bit differently: when it is yellow, the state is "on", the mouse cursor changes and the user can create a new object by clicking on the heap; when it is white, the state is "off" and the objects creation is disabled.
 	\item Objects on the heap can be dragged around by clicking on their handle at the top.
 	\item In the header it is rendered the number of objects currently populating the heap.
 \end{itemize}\
@@ -381,7 +382,7 @@ In this subsection I am going to walk you through every functionality that this 
 	\item Users can type the name of the class method that generated a given stack frame.
 	\item Users can type the name of the class that generated a given object on the heap.
 	\item Users can create primitive and instance ("reference") variables.
-	\item Users can fill the information of a variables, like the name, the type and the value.
+	\item Users can fill the information of a variable, like the name, the type and the value.
 	\item If a variable is of nature primitive, its value can be written using the keyboard.
 	\item If a variable is of nature reference, an arrow is created by clicking on the circle icon within the value input field, holding the left mouse button and releasing it on a target object on the heap.
 \end{itemize}\
@@ -392,16 +393,18 @@ In this subsection I am going to walk you through every functionality that this 
 \ul{Toolbar}
 
 \begin{itemize}
-	\item Users can download a JSON file, representing the current state of the diagram. When pressing this button, a prompt appears to enter the name of this file.
-	\item Users can upload a JSON file that was downloaded from the application. This file is parsed and it triggers the application to re-render with the state of the diagram at the time of downloading that file.
 	\item Users can start a new project (all stack frames and heap objects are deleted).
+	\item Users can delete all the arrows that have been created.
+	\item Users can download a JSON file, representing the current state of the diagram.
+	\item Users can upload a JSON file that was downloaded from the application. This file is parsed and it triggers the application to re-render with the state of the diagram at the time of downloading that file.
 	\item Users can scale up the interface. At every click, the base font-size (16px) is increased by 2px.
 	\item Users can scale down the interface. At every click, the base font-size (16px) is decreased by 2px.
+	\item Users can go in fullscreen mode.
 \end{itemize}
 
 \subsection{Storing global states} \label{storing states}
 
-In React, data is usually shared via props from parent to children: they can receive functions as props and send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than 3 levels of components. In fact, it becomes difficult for the developer to clearly understand what is going on, ending up storing data in intermediate components that are never going to use it.\\
+In React, data is usually shared via props from parent to children: they can receive functions as props and send some data back to the parent using callbacks, but they cannot pass props back to the parent component.\\ Passing props through many levels is called \emph{props drilling} \footnote{\url{https://newreactway.com/what-is-prop-drilling-in-react/}}, and it is generally seen as a situation to avoid if props needs to traverse more than three levels of components. In fact, it becomes difficult for the developer to clearly understand what is going on, ending up storing data in intermediate components that are never going to use it.\\
 
 \noindent Depending on the task, there are generally two approaches to solve (or at least improve) the situation:
 
@@ -417,9 +420,9 @@ In React, data is usually shared via props from parent to children: they can rec
 \begin{itemize}
 	\item \ul{\emph{arrowsContext}}: used to store data about arrows.
 	\item \ul{\emph{heapAddModeContext}}: it allows communication between the plus icon in the heap header and the heap dragging area, effectively allowing the user to freely create objects on the mouse position.
-	\item \ul{\emph{heapDepthIndexContext}}: it allows me to keep always the current dragged heap object above the others, by correctly setting their css z-index properties.
+	\item \ul{\emph{heapDepthIndexContext}}: it allows me to keep always the current dragged heap object above the others, by correctly setting their CSS \emph{z-index} properties.
 	\item \ul{\emph{heapMousePositionContext}}: in order to drag heap objects around, many different components needed to access the mouse position, so this context takes care of that.
-	\item \ul{\emph{resizableStackContext}}: because of the layout of the application, resizing the stack causes many coordinates to be recomputed, involving components from different  parts of the tree. This context allows all these parties to access the data they need.
+	\item \ul{\emph{resizableStackContext}}: because of the layout of the application, resizing the stack causes many coordinates to be recomputed, involving components from different  parts of the tree. This context allows all these elements to access the data they need.
 	\item \ul{\emph{stateContext}}: this context stores all the data about the diagram and keeps a big JavaScript object updated with every state change happening in the application.
 \end{itemize}
 
@@ -431,13 +434,13 @@ In React, data is usually shared via props from parent to children: they can rec
 \section{Implementation} \label{implementation}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this section I am going to talk about some important parts of the development process that were particularly challenging, and how I managed to find solutions and continue with the implementation of the design. The code base is hosted on a GitHub repository \footnote{\url{https://github.com/DaveKeehl/shd-editor}} and it is deployed on the Netlify servers \footnote{\url{https://stackandheap.netlify.app/}}.\\
-\noindent This web application can be embedded on other web applications and all it is needed in order to do that, is to place the \textbf{Editor} component anywhere in the JSX. React will take care of the rest.
+In this section I am going to talk about some important aspects of the development process that were particularly challenging, and how I managed to find solutions in order to continue with the implementation of the design. The code base is hosted on a GitHub repository \footnote{\url{https://github.com/DaveKeehl/shd-editor}} and it is deployed on the Netlify servers \footnote{\url{https://stackandheap.netlify.app/}}.\\
+\noindent This web application can be embedded on other React applications and all it is needed in order to do that, is to place the \textbf{Editor} component anywhere in the JSX. React will take care of the rest.
 
 \subsection{Dragging}
 
 One of the core features of the Informa clicker was the ability of being able to drag elements around the screen. When I was in the process of deciding how to implement it, I considered leveraging the \emph{draggable} attribute of HTML because it allows exactly that and it makes dragging very smooth, since it is supported by the browser out of the box. Moreover, there are many event listeners that one can use to customize the experience using React, naming the \textbf{onDrag}, \textbf{onDragStart}, \textbf{onDragEnd}, \textbf{onDragEnter}, \textbf{onDragExit}, \textbf{onDragLeave} and \textbf{onDragOver} events.\\
-From the outside it might seem like a perfectly viable solution, however this method has a major drawback: the dragged element looks like a semi-transparent ghost clone of the original and you cannot apply any styles to it, as CSS does not provide any rules to target it. Furthermore, this so called \emph{ghost clone} is not even part of the DOM, so you cannot even dynamically add CSS classes to customize its look, and it sets a very aggressive bounding box \footnote{\url{https://en.wikipedia.org/wiki/Minimum_bounding_box}} around the dragged object (you can see in \textbf{Figure 16} how the drop-shadow is sharply cut in the corners, instead of spreading it naturally).\\
+From the outside it might seem like a perfectly viable solution, however this method has a major drawback: the dragged element looks like a semi-transparent ghost clone of the original and you cannot apply any styles to it, as CSS does not provide any rules to target it. Furthermore, this so called \emph{ghost clone} is not even part of the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}, so you cannot even dynamically add CSS classes to customize its look, and it sets a very aggressive bounding box \footnote{\url{https://en.wikipedia.org/wiki/Minimum_bounding_box}} around the dragged object (you can see in \textbf{Figure 16} how the drop-shadow is sharply cut in the corners, instead of spreading it naturally).
 For these reasons, I decided to rebuild the whole dragging system by myself, which led me to a series of problems that I have documented in this section.
  
 \begin{figure}[h!]
@@ -460,7 +463,7 @@ In this web app, some components are incredibly similar in terms of look, but sl
 
 Arrows were the toughest feature to implement. Partially because they are implemented using SVG \footnote{\url{https://it.wikipedia.org/wiki/Scalable_Vector_Graphics}} (\emph{Scalable Vector Graphics}) and the syntax and some of its aspect are not very easy (like the \emph{path} attribute), but also because of their highly dynamic nature in the context of this web application. In fact, in order to render them, I needed to have at least a rudimental system that would register all the information representing an arrow (start/end position, start region, variable and parent from where the connection was created, target object on the heap).\\For that reason, during the first week of work on them, the only way I could have any sort of validation was by constantly printing values on the console in the browser, and by taking and analyzing screenshots. After a while I became very fast and it did not take me long to check on a photo editor if something was correct or not. However, when a bug appeared, the debugging process was always very slow and tedious, because it was difficult to pinpoint the source of the problem.\\
 
-\noindent Arrows were also a challenge when I had to decide where to place them exactly in the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}. Since they need to be drawn and always be visible while doing so, it meant that in terms of stacking order along the z-axis, they needed to be over all the other UI elements in the diagram. If I set the \emph{z-index} accordingly in my stylesheet that would visually work, but it would make everything below this new top layer not interactive. The key in this case was to find the right \emph{pointer-events} \footnote{url{https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events}} attribute value (more specifically \texttt{pointer-events:visible}), in order to let the arrows take up the entire screen, but at the same time allow the user to still interact with the underlying elements where there are no arrows drawn.\\
+\noindent Arrows were also a challenge when I had to decide where to place them exactly in the DOM. Since they need to be drawn and always be visible while doing so, it meant that in terms of stacking order along the z-axis, they needed to be over all the other UI elements in the diagram. If I set the \emph{z-index} accordingly in my stylesheet that would visually work, but it would make everything below this new top layer not interactive. The key in this case was to find the right \emph{pointer-events} \footnote{url{https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events}} attribute value (more specifically \texttt{pointer-events:visible}), in order to let the arrows take up the entire screen, but at the same time allow the user to still interact with the underlying elements where there are no arrows drawn.\\
 
 \noindent Another implementation issue I had when working with arrows, was about the way I was updating already drawn arrows. In particular, the web application keeps track of two things:
 
@@ -469,14 +472,14 @@ Arrows were the toughest feature to implement. Partially because they are implem
 	\item All the arrows that have already been drawn and that need to "listen" for certain events and be updated accordingly (for example, an object that they are connected to, changes its position or gets deleted). When a new arrow is created (the mouse click is released on a valid target block), it gets added to the array of existing arrows if there is not already an arrow with the exact same data. 
 \end{enumerate}
 
-\noindent And when it came down to keep the arrows updated, I could follow two paths:
+\noindent And when it came down to keeping the arrows updated, I could follow two paths:
 
 \begin{enumerate}
 	\item Listen for every event that led to the arrow coordinates being recomputed, and do different and specific calculations based on the event that just happened.
 	\item Use the state diagram as the single source of truth from which the array of arrows is built upon. This way leads to rebuild the whole array more or less every time the state of the diagram changes.
 \end{enumerate}
 
-\noindent Technically, the first approach is more performant, because it only updates the arrows that do really change. However, in such an application where students are required to create little diagrams, it is really unlikely to have so many elements that the performance starts to suffer so much that it becomes unusable. Furthermore, using a single source of is far easier to manage than watching for multiple events. Hence, I opted for the second way as a solution for this issue, with some parts using the first approach as well.
+\noindent Technically, the first approach is more performant, because it only updates the arrows that do really change. However, in such an application where students are required to create little diagrams, it is really unlikely to have so many elements that the performance starts to suffer so much that it becomes unusable. Furthermore, using a single source of truth is far easier to manage than watching for multiple events. Hence, I opted for the second way as a solution for this issue, with some parts using the first approach as well.
 
 
 \vspace{\fill}
@@ -487,12 +490,7 @@ Arrows were the toughest feature to implement. Partially because they are implem
 \section{User evaluation} \label{Testing}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Methodology can either be:
-% 1. User testing -> Users does same task with old and new tool
-% 2. Task replication -> I check if everything that was possible with the old tool
-%                        still holds up with the new one
-
-We are almost at the end of this report, and after talking about the design and the most important aspects of the implementation phase, I want to discuss the user evaluation process, which gave me useful insights.
+We are almost at the end of this report, and after talking about the design and the most important aspects of the implementation phase, I want to discuss the user evaluation process, which gave me useful insights on how my application behaves in the real world with real users.
 
 \subsection{Methodology}
 
@@ -533,7 +531,6 @@ The main goal of the user evaluation was to try to see if users actually had an 
 \centering
 \includegraphics[width=\textwidth-50pt]{figures/experiment-design.png}
 \caption {Design of the user evaluation experiment}
-\label{tree}
 \end{figure}
 
 \vspace{\fill}
@@ -556,16 +553,16 @@ All the participants were able to complete all tasks and (almost) everybody agre
 \begin{enumerate}
 	\item Lack of advanced object manipulation, such as duplication and position shifting in the stack (moving stack frames up and down).
 	\item Lack of navigability in the heap, combined to the elements being too big for the given space.
-	\item Objects on the heap can only be dragged by clicking on the handle at the top of their shape. This creates problems when objects are on stacked on top of each other and they cover the handle of the underlying elements, making it impossible to reposition them.
+	\item Objects on the heap can only be dragged by clicking on the handle at the top of their shape. This creates problems when objects are stacked on top of each other and they cover the handle of the underlying elements, making it impossible to reposition them.
 	\item The objects are too big and take up too much space
 \end{enumerate}
 
 \noindent All the answers from that final question were about one of those four points, so they are definitely to implement/fix in the future. I was aware of problems 2 and 3, but to be honest I had not even thought about the first one. Furthermore, the second diagram was busier than the first one and it required more elements in the scene, so it made sense that some issues would arise. I would have been surprised if the opposite happened.\\
-However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, 9 out of 15 people (60\%) were quicker with both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts. 
+However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, 9 out of 15 people (60\%) were quicker with it, and both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts. 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{figures/diagram1-time-comparison.png}
+\includegraphics[scale=0.6]{figures/diagram1-time-comparison.png}
 \caption {Diagram 1 - Time duration comparison between the Informa clicker and the new web application}
 \end{figure}
 
@@ -580,11 +577,11 @@ However, despite the apparent mixed results of the second diagram, thanks to som
 \caption{Time duration comparison for the first diagram using the two tools}
 \end{table}
 
-\noindent As we can see in \textbf{Table 2}, the time duration difference between the two tools is not as big as for diagram 1, but it was still enough to assess my work positively. Moreover, it is also important to consider that while replicating the second diagram, many participants admitted they had grasped how the Informa clicker worked, and so they did not get lost like the first time. That is a clear indication that I have made a relatively good job at creating an intuitive interface.
+\noindent As we can see in \textbf{Table 2}, the time duration difference needed to construct the second diagram using the two tools is not as big as for diagram 1, but it was still enough to assess my work positively. Moreover, it is also important to consider that while replicating the second diagram, many participants admitted that at that point they had grasped how the Informa clicker worked, and so they did not get lost like the first time. That is a clear indication that I have made a relatively good job at creating an intuitive interface.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.7]{figures/diagram2-time-comparison.png}
+\includegraphics[scale=0.6]{figures/diagram2-time-comparison.png}
 \caption {Diagram 2 - Time duration comparison between the Informa clicker and the new web application}
 \end{figure}
 
@@ -599,18 +596,22 @@ However, despite the apparent mixed results of the second diagram, thanks to som
 \caption{Time duration comparison for the second diagram using the two tools}
 \end{table}
 
-\noindent Other time time duration, I also I asked how much they would rate the clarity of the new layout and the user experience inherent from it. The participant gave positive feedback, leaving very high scores. \textbf{Table 3} shows the average and median scores, while \hyperref[clarity]{\textbf{Figures 22}} and \hyperref[ux-ratings]{\textbf{23}} show the exact ratings that were given. 
+\vspace{\fill}
+\pagebreak
+
+\noindent In addition to the time duration, I also I asked how much they would rate the clarity of the new layout and the user experience inherent from it. The participants gave positive feedback, leaving very high scores. \textbf{Table 3} shows the average and median scores, while \hyperref[clarity]{\textbf{Figures 22}} and \hyperref[ux-ratings]{\textbf{23}} show the exact ratings that were given.\\
+It is also important to note that no participant had any problem in terms of lag.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{figures/clarity-ratings.png}
+\includegraphics[scale=0.6]{figures/clarity-ratings.png}
 \caption {Ratings of the clarity of the layout in the app on a scale from 1 to 10 (1 = not clear at all; 10 = very clear)}
 \label{clarity}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=\textwidth]{figures/ux-ratings.png}
+\includegraphics[scale=0.6]{figures/ux-ratings.png}
 \caption {Ratings of the user experience in the new app on a scale from 1 to 10 (1 = terrible; 10 = amazing)}
 \label{ux-ratings}
 \end{figure}
@@ -626,9 +627,12 @@ However, despite the apparent mixed results of the second diagram, thanks to som
 \caption{Average and median values of the ratings on a scale from 1 to 10 given by the participants to the clarity of the UI and to the general UX of the application}
 \end{table}
 
+\vspace{\fill}
+\pagebreak
+
 \subsection{Comments}
 
-Based on the results obtained by the user evaluation, I can say that users found the new web application easier to use, even if there are aspects that need to be perfected or implemented in order to be fully considered ready for the public. Hence, my hypothesis can be considered accepted.
+Based on the results obtained by the user evaluation, I can say that users found the new web application easier to use, even if there are aspects that need to be perfected or further implemented in order to be fully considered ready for the public. Hence, my hypothesis can be considered accepted.
 
 \vspace{\fill}
 \pagebreak
@@ -642,32 +646,36 @@ In this section I am going to assess my work and provide a list of features and 
 \subsection{Personal assessment}
 
 Now that the project is concluded, it is time for me to make some final assessments based on the end product that I have created. \\
-In terms of features, I was able to complete all the minimum requirements which means that my web application can replicate everything that was already possible in the Informa clicker. I have also implemented features that were not originally there, such as multi arrow selection/deletion, upload and download of JSON files, interface scaling and fullscreen mode.\\
-In terms of performance the results are good, but not great. Having to constantly capture the mouse position is expensive, but it is unfortunately required to do any computation. In fact, dragging an object on the heap for some extended period of time causes the fan to inevitably start spinning very fast, and as a result the browser becomes laggy. Some browsers even presented clear performance issues, such as Safari. Perhaps it could be beneficial to do some profiling in order to understand the cause behind Safari's lack of performance when it comes to rendering highly interactive applications like mine. \\
+In terms of features, I was able to complete all the minimum requirements, which means that my web application can replicate all the basic functions that were already possible in the Informa clicker. I have also implemented features that were not originally there, such as multi arrow selection/deletion, upload and download of JSON files, interface scaling and fullscreen mode.\\
+In terms of performance the results are good, but there is some margin of improvement. Having to constantly capture the mouse position is expensive, but it is unfortunately required to do any coordinate computation. In fact, dragging an object on the heap for some extended period of time causes the fan to inevitably start spinning very fast, and as a result the browser becomes laggy. Some browsers even presented clear performance issues, such as Safari. Perhaps it could be beneficial to do some profiling, in order to understand the cause behind Safari's lack of performance when it comes to rendering highly interactive applications like mine. \\
 However, even though I do not have a lot of control over certain aspects, I cannot stop thinking about the fact that, as already stated in \hyperref[storing states]{\textbf{Section 4.4}}, some things can be for sure done better.
 
 \subsection{Future work} \label{future work}
 
-Although the diagram is already decently feature-rich, there are still some things that could be implemented:
+Although the diagram is already decently feature-rich, there are still many things that could be implemented:
 
 \begin{enumerate}
 	\item Allow users to undo and redo their actions.
-	\item Allow users to store arrays inside variables.
+	\item Allow users to represent arrays and string objects.
 	\item Allow users to pan around the heap, in order to have a virtually infinite canvas.
 	\item A mini-map, to always see the big-picture of the diagram.
-	\item Add some visual hints when an object is not currently visible but is present in the scene.
+	\item Some visual hints when an object is in the scene, but out of sight.
 	\item Touch events, in order to expand the compatibility to 	smaller devices like iPads (they should however be the lowest screen size supported by this application, since it does not make a lot of sense to create diagrams on smartphones).
-	\item Create an algorithm to automatically reposition the objects on the heap so that the overlapping elements are reduced to the minimum.
+	\item Create an auto-layout algorithm to automatically reposition the objects on the heap so that the overlapping elements are reduced to the minimum.
 	\item Auto-adjust the elements' size according to the screen size.
 	\item Allow the users to select the objects on the heap and apply some actions, like copy, duplicate, cut and paste.
-	\item Allow the users to drag the objects on the heap also by clicking on parts of their shape that is not the handle at the top.
+
 	\item Allow the users to create new objects on the heap by double click on any available space.
-	\item Allow the users to take screenshots of the diagram.
-	\item Allows the users to move stack frames up and down.
+	\item Allow the users to take screenshots of the diagram from inside the application.
+	\item Allow users to set custom names for the JSON files they download.
+	\item Allow the users to move stack frames up and down.
 	\item Add some UI assistance.
 	\item Add a "garbage collection" button in the toolbar. Pressing that button would delete all the blocks that are not referenced by other elements or that have no outgoing arrows.
 	\item Make the entire heap object draggable, not only by clicking on the handle at the top. This would allow to reposition more quickly overlapping objects. 
 \end{enumerate}
+
+\vspace{\fill}
+\pagebreak
 
 \noindent Some general improvements could also be made, in particular:
 
@@ -679,8 +687,8 @@ Although the diagram is already decently feature-rich, there are still some thin
 
 \subsection{Final notes}
 
-Overall I am very happy and proud of what I was able to accomplish on my own. When Prof. Hauswirth walked me through the possible available projects and told me about this one, I must admit I felt a bit intimidated because it sounded like a huge endeavour and I was not sure I would have been able to pull it off (especially given the relative short period of time to develop it). However, I could not ignore the thrill of building my first real web application. There were times, when I had no idea how to implement some features, but I always found a solution after doing a bit of research and some testing in order to see which one was the best move to progress forward.\\
-This project taught me a lot and now I feel not only stronger at front-end web development, but also as a programmer. For this reason I want to thank Prof. Hauswirth for giving me the chance of developing one of his projects, and for all the time he dedicated to me.
+Overall, I am very happy and proud of what I was able to accomplish on my own. When Prof. Hauswirth walked me through the possible available projects and told me about this one, I must admit I felt a bit intimidated because it sounded like a huge endeavour and I was not sure I would have been able to pull it off (especially given the relative short period of time to develop it). However, I could not ignore the thrill of building my first real web application. There were times, when I had no idea how to implement some features, but I always found a solution after doing a bit of research and some testing in order to see which one was the best move to progress forward.\\
+This project taught me a lot, and now I feel not only stronger at front-end web development, but also as a programmer. For this reason I want to thank Prof. Hauswirth for giving me the chance of developing one of his projects, and for all the time he has dedicated to me over the past few months.
 
 \vspace{\fill}
 
