@@ -24,7 +24,7 @@
 \end{committee}
 
 \abstract{
-Teaching students the fundamentals of programming is not an easy task at all, but luckily there are useful tools like Stack and Heap diagrams that can facilitate this process, by providing professors ways to easily assess the students understanding on a given topic. However, these diagrams are often drawn either on paper or with legacy software that must be installed on the computer. In this project, I developed a web-based stack and heap graphical editor, using modern front-end web technologies like React and Sass.}
+Teaching students the fundamentals of programming is not an easy task at all, but luckily there are useful tools like stack and heap diagrams that can facilitate this process, by providing professors ways to easily assess the students understanding on a given topic. However, these diagrams are often drawn either on paper or with legacy software that must be installed on the computer. In this project, I developed a web-based stack and heap graphical editor, using modern front-end web technologies like React and Sass.}
 
 
 
@@ -67,7 +67,7 @@ My web application is an example of a such a machine.
 \vspace{\fill}
 \pagebreak
  
-\noindent Finally, I also want to explain what clicker tools are. According to the Luce Group\footnote{\url{http://luce.inf.usi.ch/}}, "a clicker is a special purpose remote control used in traditional group response systems, where an instructor projects a multiple-choice question on the classroom projector and students use these tools to submit their answers by pressing one of the buttons. The advantage of using such systems is that the instructor has immediate feedback on the students understanding, by seeing their responses aggregated in the form of a histogram." \footnote{\url{http://sape.inf.usi.ch/informa}}
+\noindent Finally, I also want to explain what clicker tools are, since my work was based on recreating and improving a subset of features implemented in the Informa clicker (see \hyperref[informa clicker]{\textbf{Section 2.1}}). According to the Luce Group\footnote{\url{http://luce.inf.usi.ch/}}, ``a clicker is a special purpose remote control used in traditional group response systems, where an instructor projects a multiple-choice question on the classroom projector and students use these tools to submit their answers by pressing one of the buttons. The advantage of using such systems is that the instructor has immediate feedback on the students understanding, by seeing their responses aggregated in the form of a histogram.'' \footnote{\url{http://sape.inf.usi.ch/informa}}
  
 \subsection{Motivation}
 
@@ -76,7 +76,7 @@ However, the majority of them are automated, meaning that they take real code as
 
 \subsection{Goal} \label{goal}
 
-The goal of this project is to create a web application inspired by the Informa clicker tool, that allows students to very easily create Stack and Heap diagrams to visualize the structure of their code and better understand what is actually happening under the hood. This kind of diagram can give very useful insights both to the student and to the professor.\\ This application is planned to be integrated into Informa (prof. Hauswirth's web platform for his Programming Fundamentals 2 course), but it can also be used as a standalone application. That way, students can not only use it in class during class exercises, but also for instance at home while studying on their own.\\
+The goal of this project is to create a web application inspired by the Informa clicker tool, that allows students to very easily create stack and heap diagrams to visualize the structure of their code and better understand what is actually happening under the hood. This kind of diagram can give very useful insights both to the student and to the professor.\\ This application is planned to be integrated into Informa (prof. Hauswirth's web platform for his Programming Fundamentals 2 course), but it can also be used as a standalone application. That way, students can not only use it in class during class exercises, but also for instance at home while studying on their own.\\
 Furthermore, a JavaScript object containing the data representation of the diagram is constantly kept up-to-date with every state change happening, which can be used for automatic testing and potentially instant feedback on the correctness of their diagrams.
 
 \subsection{Use cases}
@@ -97,16 +97,18 @@ This application was developed with the two following use cases in mind:
 
 In this section I am going to showcase projects that I consider to be state-of-the-art in terms of visual representations of code. Not all of them are related to stack and heap diagrams, but they do still set a benchmark for graphical output and ease of learning.
 
-\subsection{Informa Clicker - Luce Group}
+\subsection{Informa Clicker - Luce Group} \label{informa clicker}
 
-\noindent Informa \footnote{\url{https://informa.inf.usi.ch/}} is not only a teaching platform, but it also has a clicker tool available for download, that students can use to solve interactive problems. One of the problems they can solve is showing the correct state of a Stack and Heap Diagram at a given point of a code execution.\\
+\noindent Informa \footnote{\url{https://informa.inf.usi.ch/}} is not only a teaching platform, but it also has a clicker tool available for download, that students can use to solve interactive problems. One of the problems they can solve is showing the correct state of a stack and heap diagram at a given point of a code execution.
+
+\noindent In the diagram, users can create moveable stack frames (grey rectangles) and objects (red rectangles) on the heap. Stack frames and objects have different labels (method signature for stack frames and class name for objects), but they both can store primitive and reference variables. All variables have fields for writing the variable name, type and value. In case of reference variables, the value is the reference to another object, which is represented by an arrow.\\
 
 \noindent This clicker tool was developed by professor Matthias Hauswirth, my bachelor thesis advisor, for the Luce Group.
 
 \begin{figure}[h!]
 \includegraphics[scale=0.4]{figures/informa_clicker.png}
 \centering
-\caption {Stack and Heap Diagrams in the Informa clicker tool}
+\caption {Stack and heap diagrams in the Informa clicker tool}
 \end{figure}
 
 \subsection{BlueJ - King's College London}
@@ -118,7 +120,7 @@ BlueJ is also used in the textbook \emph{Objects First with Java: A Practical In
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/bluej_classes_objects.png}
-\caption {Main view of BlueJ showing classes and the arrows connecting them. On the bottom there is the Object Bench containing all the current classes instances}
+\caption {Main view of BlueJ showing classes and the arrows connecting them. On the bottom there is the Object Bench containing all the current class instances}
 \label {bluej_classes_objects}
 \end{figure}
 
@@ -139,9 +141,12 @@ Novis \cite{7743153} is a notional machine implementation, aimed at beginners an
 \caption {Novis}
 \end{figure}
 
+\vspace{\fill}
+\pagebreak
+
 \subsection{JIVE}
 
-JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Interactive Visualization Environment} and it is an interactive execution for the Eclipse IDE \footnote{\url{https://www.eclipse.org/}} that provides visualizations of Java programs.
+JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Interactive Visualization Environment} and it is an interactive execution for the Eclipse IDE \footnote{\url{https://www.eclipse.org/}} that provides visualizations of Java programs. In particular, it features an object diagram that allows users to see the current objects on the heap and their interconnections using arrows.
 
 \begin{figure}[h!]
 \centering
@@ -155,7 +160,7 @@ ViLLE \footnote{\url{https://ville.cs.utu.fi/old/}} is a multi-language program 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.2]{figures/ville.png}
+\includegraphics[scale=0.165]{figures/ville.png}
 \caption {ViLLE}
 \end{figure}
 
@@ -165,7 +170,7 @@ Python Tutor \footnote{\url{http://www.pythontutor.com/}} is a web application f
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.177]{figures/python_tutor}
+\includegraphics[scale=0.168]{figures/python_tutor}
 \caption {Python tutor}
 \end{figure}
 
@@ -180,7 +185,7 @@ In this section I am going to talk about the pre-production phase of the project
 
 \subsection{UI/UX analysis}
 
-As already mentioned in \hyperref[goal]{\textbf{Section 1.3}}, the main goal of this project was to create an improved and web-based version of the already existing Stack and Heap Diagrams in the Informa clicker tool. In order to understand what worked and what did not work, I did an analysis of its user interface (UI) and user experience (UX) and here is what I found:\\
+As already mentioned in \hyperref[goal]{\textbf{Section 1.3}}, the main goal of this project was to create an improved and web-based version of the already existing stack and heap diagram in the Informa clicker tool. In order to understand what worked and what did not work, I did an analysis of its user interface (UI) and user experience (UX) and here is what I found:\\
 
 \textbf{\ul{UI - What works:}}
 
@@ -260,7 +265,7 @@ In this section I am going to describe the design process, not only coding-wise 
 In \hyperref[requirements+analysis]{\textbf{Section 3}}, we saw how the biggest problem of the Informa clicker tool was the user interface and because of that, the first week and a half were completely spent sketching ideas on paper, bringing the best ones in Figma \footnote{My go-to UI/UX design editor (\url{https://www.figma.com/}).} and ultimately creating the high-fidelity mockups \footnote{Full size model of a design or device, used for product presentations or other purposes.} to show to prof. Hauswirth in order to get feedback.\\
 The first step was to figure out how to divide the stack and heap areas, since one of the requirements was about having a clear distinction between the two. In my mind there were two possible ways to approach this: either using a floating or docked stack.\\
 
-\noindent \hyperref[floating stack]{\textbf{Figure 10}} shows the first version of the user interface with a floating stack, and even though it is indeed separate from the heap and it might look somewhat cool, I did not like the clunkiness of having such an imposing object in the scene. However, one important solution was carried on until the end of the project, and that was the block data encapsulation, a fancy expression to indicate that every object has all its information contained within a rectangular shape. The Informa clicker is very similar in this regard, since it has all variables in a similar looking element, so it is not a big change, but it certainly helps "glueing" the data and offers clearer separation between blocks.\\
+\noindent \hyperref[floating stack]{\textbf{Figure 10}} shows the first version of the user interface with a floating stack, and even though it is indeed separate from the heap and it might look somewhat cool, I did not like the clunkiness of having such an imposing object in the scene. However, one important solution was carried on until the end of the project, and that was the block data encapsulation, a fancy expression to indicate that every object has all its information contained within a rectangular shape. The Informa clicker is very similar in this regard, since it has all variables in a similar looking element, so it is not a big change, but it certainly helps ``glueing'' the data and offers clearer separation between blocks.\\
 As far as stack frames and heap objects, I tried to adopt a more schematic approach, and reserve one row for each detail (name, type and value) of every variable. However, this idea was eventually dropped because it took up too much space, and the number of variables that were visible without causing the stack content to be scrollable, was extremely low. 
 
 \begin{figure}[h!]
@@ -365,7 +370,7 @@ In this subsection I am going to walk you through every functionality that this 
 \ul{Heap}
 
 \begin{itemize}
-	\item Similarly to what happens in the stack, by clicking on the plus button, users can create new objects on the heap. However, the buttons works a bit differently: when it is yellow, the state is "on", the mouse cursor changes and the user can create a new object by clicking on the heap; when it is white, the state is "off" and the objects creation is disabled.
+	\item Similarly to what happens in the stack, by clicking on the plus button, users can create new objects on the heap. However, the buttons works a bit differently: when it is yellow, the state is ``on'', the mouse cursor changes and the user can create a new object by clicking on the heap; when it is white, the state is ``off'' and the objects creation is disabled.
 	\item Objects on the heap can be dragged around by clicking on their handle at the top.
 	\item In the header it is rendered the number of objects currently populating the heap.
 \end{itemize}\
@@ -381,7 +386,7 @@ In this subsection I am going to walk you through every functionality that this 
 \begin{itemize}
 	\item Users can type the name of the class method that generated a given stack frame.
 	\item Users can type the name of the class that generated a given object on the heap.
-	\item Users can create primitive and instance ("reference") variables.
+	\item Users can create primitive and instance (``reference'') variables.
 	\item Users can fill the information of a variable, like the name, the type and the value.
 	\item If a variable is of nature primitive, its value can be written using the keyboard.
 	\item If a variable is of nature reference, an arrow is created by clicking on the circle icon within the value input field, holding the left mouse button and releasing it on a target object on the heap.
@@ -397,8 +402,8 @@ In this subsection I am going to walk you through every functionality that this 
 	\item Users can delete all the arrows that have been created.
 	\item Users can download a JSON file, representing the current state of the diagram.
 	\item Users can upload a JSON file that was downloaded from the application. This file is parsed and it triggers the application to re-render with the state of the diagram at the time of downloading that file.
-	\item Users can scale up the interface. At every click, the base font-size (16px) is increased by 2px.
-	\item Users can scale down the interface. At every click, the base font-size (16px) is decreased by 2px.
+%	\item Users can scale up the interface. At every click, the base font-size (16px) is increased by 2px.
+%	\item Users can scale down the interface. At every click, the base font-size (16px) is decreased by 2px.
 	\item Users can go in fullscreen mode.
 \end{itemize}
 
@@ -435,7 +440,7 @@ In React, data is usually shared via props from parent to children: they can rec
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 In this section I am going to talk about some important aspects of the development process that were particularly challenging, and how I managed to find solutions in order to continue with the implementation of the design. The code base is hosted on a GitHub repository \footnote{\url{https://github.com/DaveKeehl/shd-editor}} and it is deployed on the Netlify servers \footnote{\url{https://stackandheap.netlify.app/}}.\\
-\noindent This web application can be embedded on other React applications and all it is needed in order to do that, is to place the \textbf{Editor} component anywhere in the JSX. React will take care of the rest.
+\noindent In the near future, this web application will be embeddable on other React applications and all it is needed in order to do that, is to place the \textbf{Editor} component anywhere in the JSX. React will take care of the rest.
 
 \subsection{Dragging}
 
@@ -451,7 +456,7 @@ For these reasons, I decided to rebuild the whole dragging system by myself, whi
  
 \subsection{Multiple coordinates conversions}
 
-At the beginning of the project, when I was building all the JSX and setting up all the CSS rules, I soon discovered that stack and heap needed different "treatments". The stack is built using flexbox with vertical direction, so the coordinates of each stack frame do not really matter, they just stack on top of each other. On the other hand, heap objects need precise coordinates in order to be placed on the screen. However, there is a twist: heap objects coordinates are \emph{relative}, meaning that position ${(0,0)}$ is the top left corner of the heap (header excluded), while mouse coordinates are absolute (= relative to the entire viewport).\\
+At the beginning of the project, when I was building all the JSX and setting up all the CSS rules, I soon discovered that stack and heap needed different ``treatments''. The stack is built using flexbox with vertical direction, so the coordinates of each stack frame do not really matter, they just stack on top of each other. On the other hand, heap objects need precise coordinates in order to be placed on the screen. However, there is a twist: heap objects coordinates are \emph{relative}, meaning that position ${(0,0)}$ is the top left corner of the heap (header excluded), while mouse coordinates are absolute (= relative to the entire viewport).\\
 Objects on the heap use relative coordinates because the stack is resizable: if an object on the heap had position absolute, it would stay in the same place while resizing the stack, not producing the desired effect of seeing everything shift; it would also go \emph{behind} the stack, a very undesirable side effect.\\
 Because of that, I often found myself converting coordinates from system to system.
 
@@ -461,7 +466,7 @@ In this web app, some components are incredibly similar in terms of look, but sl
 
 \subsection{Arrows}
 
-Arrows were the toughest feature to implement. Partially because they are implemented using SVG \footnote{\url{https://it.wikipedia.org/wiki/Scalable_Vector_Graphics}} (\emph{Scalable Vector Graphics}) and the syntax and some of its aspect are not very easy (like the \emph{path} attribute), but also because of their highly dynamic nature in the context of this web application. In fact, in order to render them, I needed to have at least a rudimental system that would register all the information representing an arrow (start/end position, start region, variable and parent from where the connection was created, target object on the heap).\\For that reason, during the first week of work on them, the only way I could have any sort of validation was by constantly printing values on the console in the browser, and by taking and analyzing screenshots. After a while I became very fast and it did not take me long to check on a photo editor if something was correct or not. However, when a bug appeared, the debugging process was always very slow and tedious, because it was difficult to pinpoint the source of the problem.\\
+Arrows were the toughest feature to implement. Partially because they are implemented using SVG \footnote{\url{https://it.wikipedia.org/wiki/Scalable_Vector_Graphics}} (\emph{Scalable Vector Graphics}) and the syntax and some of its aspect are not very easy (like the \emph{path} attribute), but also because of their highly dynamic nature in the context of this web application. In fact, in order to render them, I needed to have at least a rudimentary system that would register all the information representing an arrow (start/end position, start region, variable and parent from where the connection was created, target object on the heap).\\For that reason, during the first week of work on them, the only way I could have any sort of validation was by constantly printing values on the console in the browser, and by taking and analyzing screenshots. After a while I became very fast and it did not take me long to check on a photo editor if something was correct or not. However, when a bug appeared, the debugging process was always very slow and tedious, because it was difficult to pinpoint the source of the problem.\\
 
 \noindent Arrows were also a challenge when I had to decide where to place them exactly in the DOM. Since they need to be drawn and always be visible while doing so, it meant that in terms of stacking order along the z-axis, they needed to be over all the other UI elements in the diagram. If I set the \emph{z-index} accordingly in my stylesheet that would visually work, but it would make everything below this new top layer not interactive. The key in this case was to find the right \emph{pointer-events} \footnote{url{https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events}} attribute value (more specifically \texttt{pointer-events:visible}), in order to let the arrows take up the entire screen, but at the same time allow the user to still interact with the underlying elements where there are no arrows drawn.\\
 
@@ -469,7 +474,7 @@ Arrows were the toughest feature to implement. Partially because they are implem
 
 \begin{enumerate}
 	\item The new arrow that is being drawn on the screen.
-	\item All the arrows that have already been drawn and that need to "listen" for certain events and be updated accordingly (for example, an object that they are connected to, changes its position or gets deleted). When a new arrow is created (the mouse click is released on a valid target block), it gets added to the array of existing arrows if there is not already an arrow with the exact same data. 
+	\item All the arrows that have already been drawn and that need to ``listen'' for certain events and be updated accordingly (for example, an object that they are connected to, changes its position or gets deleted). When a new arrow is created (the mouse click is released on a valid target block), it gets added to the array of existing arrows if there is not already an arrow with the exact same data. 
 \end{enumerate}
 
 \noindent And when it came down to keeping the arrows updated, I could follow two paths:
@@ -542,7 +547,7 @@ All the participants were able to complete all tasks and (almost) everybody agre
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{figures/ease-of-use.png}
+\includegraphics[scale=0.45]{figures/ease-of-use.png}
 \caption {The majority of the participants found that the new tool is easier to use}
 \end{figure}
 
@@ -558,7 +563,7 @@ All the participants were able to complete all tasks and (almost) everybody agre
 \end{enumerate}
 
 \noindent All the answers from that final question were about one of those four points, so they are definitely to implement/fix in the future. I was aware of problems 2 and 3, but to be honest I had not even thought about the first one. Furthermore, the second diagram was busier than the first one and it required more elements in the scene, so it made sense that some issues would arise. I would have been surprised if the opposite happened.\\
-However, despite the apparent mixed results of the second diagram, thanks to some quick statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, 9 out of 15 people (60\%) were quicker with it, and both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts. 
+However, despite the apparent mixed results of the second diagram, thanks to a straightforward statistical analysis, I was able to assess that the new web application scored higher nonetheless. In fact, 9 out of 15 people (60\%) were quicker with it, and both the average and median time duration needed to draw the diagrams using the web tool were lower than the Informa clicker counterparts. 
 
 \begin{figure}[h!]
 \centering
@@ -652,6 +657,7 @@ However, even though I do not have a lot of control over certain aspects, I cann
 Although the diagram is already decently feature-rich, there are still many things that could be implemented:
 
 \begin{enumerate}
+	\item Finish implementing the interface scalability.
 	\item Allow users to undo and redo their actions.
 	\item Allow users to represent arrays and string objects.
 	\item Allow users to pan around the heap, in order to have a virtually infinite canvas.
@@ -667,8 +673,9 @@ Although the diagram is already decently feature-rich, there are still many thin
 	\item Allow users to set custom names for the JSON files they download.
 	\item Allow the users to move stack frames up and down.
 	\item Add some UI assistance.
-	\item Add a "garbage collection" button in the toolbar. Pressing that button would delete all the blocks that are not referenced by other elements or that have no outgoing arrows.
+	\item Add a ``garbage collection'' button in the toolbar. Pressing that button would delete all the blocks that are not referenced by other elements or that have no outgoing arrows.
 	\item Make the entire heap object draggable, not only by clicking on the handle at the top. This would allow to reposition more quickly overlapping objects. 
+	\item Modify the architecture and the CSS rules a bit, in order to allow other people to embed this graphical editor within other React applications.
 \end{enumerate}
 
 \vspace{\fill}
