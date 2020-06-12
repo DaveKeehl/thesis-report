@@ -144,7 +144,7 @@ Novis \cite{7743153} is a notional machine implementation, aimed at beginners an
 \vspace{\fill}
 \pagebreak
 
-\subsection{JIVE}
+\subsection{JIVE - University at Buffalo, USA}
 
 JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Interactive Visualization Environment} and it is an interactive execution for the Eclipse IDE \footnote{\url{https://www.eclipse.org/}} that provides visualizations of Java programs. In particular, it features an object diagram that allows users to see the current objects on the heap and their interconnections using arrows.
 
@@ -154,7 +154,7 @@ JIVE \footnote{\url{https://cse.buffalo.edu/jive/}} stands for \emph{Java Intera
 \caption {JIVE}
 \end{figure}
 
-\subsection{ViLLE}
+\subsection{ViLLE - University of Turku, Finland}
 
 ViLLE \footnote{\url{https://ville.cs.utu.fi/old/}} is a multi-language program visualization tool developed by the University of Turku in Finland. Like other visualizers, its goal is to support the learning experience of beginner programmers, who might struggle to understand how to code. It has different use cases, for example it can be used to create and edit code snippets and to see in real time what happens during their execution.
 
@@ -297,7 +297,7 @@ Besides stack and heap being separated by a divider, each has a header which lab
 	\item Heap objects now have a handle at the top, so that users can drag them around.
 \end{enumerate}
 
-\noindent However, at this stage we have also started to notice how blocks were really big as opposed to the ones present in the clicker tool. However, we decided to keep this design because ultimately the pros outnumbered the cons and this issue could have been addressed during development.
+\noindent At this stage we have also started to notice how blocks were really big as opposed to the ones present in the clicker tool. However, we decided to keep this design because ultimately the pros outnumbered the cons and this issue could have been addressed during development.
 
 \vspace{\fill}
 \pagebreak
@@ -323,7 +323,7 @@ Although stack and heap are separate regions that expect different user interact
 	\item Have blocks, which look and function in the exact way, except their color schemes.
 \end{itemize}
 
-\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[implementation]{\textbf{Section 5}} for a more detailed explanation about this topic). \hyperref[tree]{\textbf{Figure 14}} shows the components tree on which I eventually settled.
+\noindent Because of these similarities, I have encountered some problems trying to extract the same features in common components in order to avoid as much code repetition as possible (see \hyperref[implementation]{\textbf{Section 5.3}}). \hyperref[tree]{\textbf{Figure 14}} shows the components tree on which I eventually settled.
 
 \bigskip
 
@@ -378,7 +378,8 @@ In this subsection I am going to walk you through every functionality that this 
 \ul{Regions separator}
 
 \begin{itemize}
-	\item Users can drag the vertical separator between the stack and the heap to resize their width.
+	\item Users can drag horizontally the vertical separator between the stack and the heap to resize their width.
+	\item Users can reset the stack width by double clicking on the vertical separator.
 \end{itemize}\
 
 \ul{Stack frames and heap objects}
@@ -398,13 +399,13 @@ In this subsection I am going to walk you through every functionality that this 
 \ul{Toolbar}
 
 \begin{itemize}
-	\item Users can start a new project (all stack frames and heap objects are deleted).
+	\item Users can start a new project (all stack frames, heap objects and arrows are deleted).
 	\item Users can delete all the arrows that have been created.
 	\item Users can download a JSON file, representing the current state of the diagram.
 	\item Users can upload a JSON file that was downloaded from the application. This file is parsed and it triggers the application to re-render with the state of the diagram at the time of downloading that file.
 %	\item Users can scale up the interface. At every click, the base font-size (16px) is increased by 2px.
 %	\item Users can scale down the interface. At every click, the base font-size (16px) is decreased by 2px.
-	\item Users can go in fullscreen mode.
+	\item Users can go to and exit from fullscreen mode.
 \end{itemize}
 
 \subsection{Storing global states} \label{storing states}
@@ -418,7 +419,7 @@ In React, data is usually shared via props from parent to children: they can rec
 	\item State management tools (e.g., \emph{Redux} \footnote{\url{https://react-redux.js.org/}} and \emph{Context} \footnote{\url{https://reactjs.org/docs/context.html}})
 \end{enumerate}
 
-\noindent Both approaches have pros and cons, but for global data transferring it makes more sense to use a state management tool, which is what I did. I used the native React Context API in conjunction with the relatively new \emph{React Hooks} \footnote{\url{https://reactjs.org/docs/hooks-intro.html}}. By doing so, I have been able to access data from any level of tree. However, I must also confess that Context, while being great at what it unlocks, introduces a bit of chaos when overused, which is sadly my case. This is maybe the aspect of this web application I would like to revisit the most in a few years, when I will be more experienced.\\
+\noindent Both approaches have pros and cons, but for global data transferring it makes more sense to use a state management tool, which is what I did. I used the native React Context API in conjunction with the relatively new \emph{React Hooks} \footnote{\url{https://reactjs.org/docs/hooks-intro.html}}. By doing so, I have been able to access data from any level of components tree. However, I must also confess that Context, while being great at what it unlocks, introduces a bit of chaos when overused, which is sadly my case. This is maybe the aspect of this web application I would like to revisit the most in a few years, when I will be more experienced.\\
 
 \noindent In particular I created the following contexts:
 
@@ -427,7 +428,7 @@ In React, data is usually shared via props from parent to children: they can rec
 	\item \ul{\emph{heapAddModeContext}}: it allows communication between the plus icon in the heap header and the heap dragging area, effectively allowing the user to freely create objects on the mouse position.
 	\item \ul{\emph{heapDepthIndexContext}}: it allows me to keep always the current dragged heap object above the others, by correctly setting their CSS \emph{z-index} properties.
 	\item \ul{\emph{heapMousePositionContext}}: in order to drag heap objects around, many different components needed to access the mouse position, so this context takes care of that.
-	\item \ul{\emph{resizableStackContext}}: because of the layout of the application, resizing the stack causes many coordinates to be recomputed, involving components from different  parts of the tree. This context allows all these elements to access the data they need.
+	\item \ul{\emph{resizableStackContext}}: because of the layout of the application, resizing the stack causes many coordinates to be recomputed, involving components from different  parts of the components tree. This context allows all these elements to access the data they need.
 	\item \ul{\emph{stateContext}}: this context stores all the data about the diagram and keeps a big JavaScript object updated with every state change happening in the application.
 \end{itemize}
 
@@ -445,7 +446,7 @@ In this section I am going to talk about some important aspects of the developme
 \subsection{Dragging}
 
 One of the core features of the Informa clicker was the ability of being able to drag elements around the screen. When I was in the process of deciding how to implement it, I considered leveraging the \emph{draggable} attribute of HTML because it allows exactly that and it makes dragging very smooth, since it is supported by the browser out of the box. Moreover, there are many event listeners that one can use to customize the experience using React, naming the \textbf{onDrag}, \textbf{onDragStart}, \textbf{onDragEnd}, \textbf{onDragEnter}, \textbf{onDragExit}, \textbf{onDragLeave} and \textbf{onDragOver} events.\\
-From the outside it might seem like a perfectly viable solution, however this method has a major drawback: the dragged element looks like a semi-transparent ghost clone of the original and you cannot apply any styles to it, as CSS does not provide any rules to target it. Furthermore, this so called \emph{ghost clone} is not even part of the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}, so you cannot even dynamically add CSS classes to customize its look, and it sets a very aggressive bounding box \footnote{\url{https://en.wikipedia.org/wiki/Minimum_bounding_box}} around the dragged object (you can see in \textbf{Figure 16} how the drop-shadow is sharply cut in the corners, instead of spreading it naturally).
+From the outside it might seem like a perfectly viable solution, however this method has a major drawback: the dragged element looks like a semi-transparent ghost clone of the original and you cannot apply any styles to it, as CSS does not provide any rules to target it. Furthermore, this so called \emph{ghost clone} is not even part of the DOM \footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction}}, so you cannot dynamically add CSS classes to customize its look, and it sets a very aggressive bounding box \footnote{\url{https://en.wikipedia.org/wiki/Minimum_bounding_box}} around the dragged object (you can see in \textbf{Figure 16} how the drop-shadow is sharply cut in the corners, instead of spreading naturally).
 For these reasons, I decided to rebuild the whole dragging system by myself, which led me to a series of problems that I have documented in this section.
  
 \begin{figure}[h!]
@@ -648,13 +649,13 @@ In this section I am going to assess my work and provide a list of features and 
 \subsection{Personal assessment}
 
 Now that the project is concluded, it is time for me to make some final assessments based on the end product that I have created. \\
-In terms of features, I was able to complete all the minimum requirements, which means that my web application can replicate all the basic functions that were already possible in the Informa clicker. I have also implemented features that were not originally there, such as multi arrow selection/deletion, upload and download of JSON files, interface scaling and fullscreen mode.\\
+In terms of features, I was able to complete all the minimum requirements, which means that my web application can replicate all the basic functions that were already possible in the Informa clicker. I have also implemented features that were not originally there, such as multi arrow selection/deletion, upload and download of JSON files and fullscreen mode.\\
 In terms of performance the results are good, but there is some margin of improvement. Having to constantly capture the mouse position is expensive, but it is unfortunately required to do any coordinate computation. In fact, dragging an object on the heap for some extended period of time causes the fan to inevitably start spinning very fast, and as a result the browser becomes laggy. Some browsers even presented clear performance issues, such as Safari. Perhaps it could be beneficial to do some profiling, in order to understand the cause behind Safari's lack of performance when it comes to rendering highly interactive applications like mine. \\
 However, even though I do not have a lot of control over certain aspects, I cannot stop thinking about the fact that, as already stated in \hyperref[storing states]{\textbf{Section 4.4}}, some things can be for sure done better.
 
 \subsection{Future work} \label{future work}
 
-Although the diagram is already decently feature-rich, there are still many things that could be implemented:
+Although the editor is already decently feature-rich, there are still many things that could be implemented:
 
 \begin{enumerate}
 	\item Finish implementing the interface scalability.
@@ -667,8 +668,7 @@ Although the diagram is already decently feature-rich, there are still many thin
 	\item Create an auto-layout algorithm to automatically reposition the objects on the heap so that the overlapping elements are reduced to the minimum.
 	\item Auto-adjust the elements' size according to the screen size.
 	\item Allow the users to select the objects on the heap and apply some actions, like copy, duplicate, cut and paste.
-
-	\item Allow the users to create new objects on the heap by double click on any available space.
+	\item Allow the users to create new objects on the heap by double clicking on any available space.
 	\item Allow the users to take screenshots of the diagram from inside the application.
 	\item Allow users to set custom names for the JSON files they download.
 	\item Allow the users to move stack frames up and down.
@@ -685,14 +685,14 @@ Although the diagram is already decently feature-rich, there are still many thin
 
 \begin{enumerate}
 	\item Research on a possible more scalable solution that allows an easier maintenance of the state of the app, without neither having to rebuild the diagram at every state change nor having to listen to all the different events.
-	\item If the research on point 1 shows that listening to different events is a must for performance optimization, research on a way to reduce the complexity of this task (perhaps only a few tactical event listener might be required instead of eight or ten).
+	\item If the research on point 1 shows that listening to different events is a must for performance optimization, research on a way to reduce the complexity of this task (perhaps only a few tactical event listeners might be required instead of eight or ten).
 	\item Research on why Safari responds slowly to some events. An answer to this issue could hint at perhaps a less expensive way of handling and computing spatial coordinates.
 \end{enumerate}
 
 \subsection{Final notes}
 
-Overall, I am very happy and proud of what I was able to accomplish on my own. When Prof. Hauswirth walked me through the possible available projects and told me about this one, I must admit I felt a bit intimidated because it sounded like a huge endeavour and I was not sure I would have been able to pull it off (especially given the relative short period of time to develop it). However, I could not ignore the thrill of building my first real web application. There were times, when I had no idea how to implement some features, but I always found a solution after doing a bit of research and some testing in order to see which one was the best move to progress forward.\\
-This project taught me a lot, and now I feel not only stronger at front-end web development, but also as a programmer. For this reason I want to thank Prof. Hauswirth for giving me the chance of developing one of his projects, and for all the time he has dedicated to me over the past few months.
+Overall, I am very happy and proud of what I was able to accomplish on my own. When prof. Hauswirth walked me through the possible available projects and told me about this one, I must admit I felt a bit intimidated because it sounded like a huge endeavour and I was not sure I would have been able to pull it off (especially given the relative short period of time to develop it). However, I could not ignore the thrill of building my first real web application. There were times, when I had no idea how to implement some features, but I always found a solution after doing a bit of research and some testing in order to see what was the best move to progress forward.\\
+This project taught me a lot, and now I feel not only stronger at front-end web development, but also as a programmer. For this reason I want to thank prof. Hauswirth for giving me the chance of developing one of his projects, and for all the time he has dedicated to me over the past few months.
 
 \vspace{\fill}
 
